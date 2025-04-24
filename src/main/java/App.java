@@ -11,7 +11,7 @@ public class App {
         ArrayList<Proveedor> proveedores = new ArrayList<>();
         Scanner leer = new Scanner(System.in);
         ViewConsole view = new ViewConsole();
-        Articulo articulo = new Articulo("123456789", "<NAME>", 1000, TipoProducto.Alimento, 10);
+        Articulo articulo = new Articulo("123456789", "Banana", 1000, TipoProducto.Alimento, 10);
         System.out.println(articulo);
 
         System.out.println("Sistema de Gestión de Compras ERP");

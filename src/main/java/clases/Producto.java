@@ -6,7 +6,8 @@ public abstract class Producto {
     private float precioU;
     private TipoProducto tipoProducto;
 
-    public Producto(String coidgo, String nombre, float precioU, TipoProducto tipoProducto){
+    //Constructor
+    public Producto(String codigo, String nombre, float precioU, TipoProducto tipoProducto){
         this.codigo = codigo;
         this.nombre = nombre;
         this.precioU = precioU;
@@ -41,10 +42,12 @@ public abstract class Producto {
         return tipoProducto;
 
     }
+
     public void setTipoProducto(TipoProducto tipoProducto){
         this.tipoProducto = tipoProducto;
     }
 
+    //Metodo Abstracto para calcular costo
     abstract float calcularCosto();
 
 
