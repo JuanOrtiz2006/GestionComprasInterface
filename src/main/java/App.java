@@ -99,7 +99,7 @@ public class App {
                     }
                     break;
                 case 6:
-                    System.out.println("Listar solicitudes de compra");
+                    System.out.println("Listar solicitudes de compras: ");
                     break;
                 case 7:
                     System.out.println("Buscar proveedor por Cedula ");
