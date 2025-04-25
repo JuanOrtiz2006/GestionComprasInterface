@@ -23,14 +23,25 @@ public class App {
             opcion = leer.nextInt();
             switch (opcion) {
                 case 1:
-                    String respuestas [] = view.registroProvedor();
-                    Proveedor proveedor = new Proveedor(respuestas[0], respuestas[1],respuestas[2], respuestas[3]);
+                    view.mostrarMensaje("Registrar proveedor");
+                    view.mostrarMensaje("Ingrese la Empresa");
+                    String empresa = leer.next();
+                    view.mostrarMensaje("Ingrese el nombre del proveedor: ");
+                    String nombre = leer.next();
+                    view.mostrarMensaje("Ingrese el correo del proveedor:");
+                    String correo = leer.next();
+                    view.mostrarMensaje("Ingrese la cedula del proveedor:");
+                    String cedula = leer.next();
+                    Proveedor proveedor = new Proveedor(empresa, nombre, correo, cedula);
                     proveedores.add(proveedor); // Guardar proveedor
                     view.mostrarMensaje("Proveedor registrado correctamente.");
+
                     break;
                 case 2:
-                    int respuesta = view.registrarProducto();
-                    if (respuesta == 1){
+                    System.out.println("Registrar producto");
+                    view.mostrarMensaje("Que tipo de producto desea registrar?: "+"1. Articulos , 2. Paquete, 3. Servicios");
+                    int tipoProducto = leer.nextInt();
+                    if (tipoProducto == 1){
                         view.mostrarMensaje("Ingrese el codigo del Articulo: ");
                         String codigoA = leer.next();
                         view.mostrarMensaje("Ingrese el nombre del Articulo: ");
@@ -44,6 +55,7 @@ public class App {
                         view.mostrarMensaje("Proveedor registrado correctamente.");
 
                     }
+
                     break;
                 case 3:
                     System.out.println("Registrar solicitud de compra");
