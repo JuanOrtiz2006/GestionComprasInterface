@@ -6,7 +6,7 @@ public abstract class Producto {
     private float precioU;
     private TipoProducto tipoProductoA;
 
-    public Producto(String coidgo, String nombre, float precioU, TipoProducto tipoProductoA){
+    public Producto(String codigo, String nombre, float precioU, TipoProducto tipoProductoA){
         this.codigo = codigo;
         this.nombre = nombre;
         this.precioU = precioU;
