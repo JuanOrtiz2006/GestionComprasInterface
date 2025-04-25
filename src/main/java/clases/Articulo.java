@@ -5,8 +5,8 @@ import enums.TipoProducto;
 public class Articulo extends Producto {
     private float IVA;
 
-    public Articulo(String codigo, String nombre, float precioU, TipoProducto tipoProducto, float IVA) {
-        super(codigo, nombre, precioU, tipoProducto);
+    public Articulo(String codigo, String nombre, float precioU, TipoProducto tipoProductoA, float IVA) {
+        super(codigo, nombre, precioU, tipoProductoA);
         this.IVA = IVA;
     }
 

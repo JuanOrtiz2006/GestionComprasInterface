@@ -2,17 +2,17 @@ import clases.Articulo;
 import clases.Proveedor;
 import clases.ViewConsole;
 import enums.TipoProducto;
-
+import clases.Producto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         ArrayList<Proveedor> proveedores = new ArrayList<>();
+        ArrayList<Producto> productos = new ArrayList<>();
         Scanner leer = new Scanner(System.in);
         ViewConsole view = new ViewConsole();
-        Articulo articulo = new Articulo("123456789", "<NAME>", 1000, TipoProducto.Alimento, 10);
-        System.out.println(articulo);
+
 
         System.out.println("Sistema de Gestión de Compras ERP");
 
@@ -38,12 +38,32 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Registrar producto");
+                    view.mostrarMensaje("Que tipo de producto desea registrar?: "+"1. Articulos , 2. Paquete, 3. Servicios");
+                    int tipoProducto = leer.nextInt();
+                    if (tipoProducto == 1){
+                        view.mostrarMensaje("Ingrese el codigo del Articulo: ");
+                        String codigoA = leer.next();
+                        view.mostrarMensaje("Ingrese el nombre del Articulo: ");
+                        String nombreA = leer.next();
+                        view.mostrarMensaje("Ingrese el precio unitario del Articulo:");
+                        float precioU = leer.nextFloat();
+                        view.mostrarMensaje("Ingrese el IVA del Producto:");
+                        int IVA = leer.nextInt();
+                        Articulo articulo = new Articulo(codigoA, nombreA, precioU, TipoProducto.Limpieza, IVA);
+                        productos.add(articulo); // Guardar proveedor
+                        view.mostrarMensaje("Proveedor registrado correctamente.");
+
+                    }
+
                     break;
                 case 3:
                     System.out.println("Registrar solicitud de compra");
                     break;
                 case 4:
                     System.out.println("Listar Proveedores");
+                    for (int i = 0; i < proveedores.size(); i++){
+                        view.mostrarMensaje(proveedores.get(i).toString());
+                    }
                     break;
                 case 5:
                     System.out.println("Listar Productos");

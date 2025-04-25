@@ -4,13 +4,13 @@ public abstract class Producto {
     private String codigo;
     private String nombre;
     private float precioU;
-    private TipoProducto tipoProducto;
+    private TipoProducto tipoProductoA;
 
-    public Producto(String coidgo, String nombre, float precioU, TipoProducto tipoProducto){
+    public Producto(String coidgo, String nombre, float precioU, TipoProducto tipoProductoA){
         this.codigo = codigo;
         this.nombre = nombre;
         this.precioU = precioU;
-        this.tipoProducto = tipoProducto;
+        this.tipoProductoA = tipoProductoA;
     }
 
     public String getCodigo(){
@@ -38,11 +38,11 @@ public abstract class Producto {
     }
 
     public TipoProducto getTipoProducto(){
-        return tipoProducto;
+        return tipoProductoA;
 
     }
     public void setTipoProducto(TipoProducto tipoProducto){
-        this.tipoProducto = tipoProducto;
+        this.tipoProductoA = tipoProductoA;
     }
 
     abstract float calcularCosto();
@@ -54,6 +54,6 @@ public abstract class Producto {
         return "Codigo: " + codigo +
                 "\nProducto: " + nombre +
                 "\nPrecio Unitario: " + precioU +
-                "\nTipo: " + tipoProducto;
+                "\nTipo: " + tipoProductoA;
     }
 }

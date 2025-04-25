@@ -23,8 +23,7 @@ public class Proveedor extends Persona{
 
     @Override
     public String toString(){
-        return"Proveedor: \n"
-                + "Empresa: "+empresa;
+        return super.toString() + "\n Empresa: "+empresa;
     }
 }
 
