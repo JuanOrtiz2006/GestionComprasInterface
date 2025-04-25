@@ -14,6 +14,7 @@ public class App {
 
         System.out.println("Sistema de Gestión de Compras ERP");
 
+
         int opcion;
         while (true) {
             view.mostrarMenu();
