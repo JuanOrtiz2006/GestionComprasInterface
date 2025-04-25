@@ -1,6 +1,4 @@
-import clases.Articulo;
-import clases.Proveedor;
-import clases.ViewConsole;
+import clases.*;
 import enums.TipoProducto;
 import clases.Producto;
 import java.util.ArrayList;
@@ -37,20 +35,48 @@ public class App {
 
                     break;
                 case 2:
-                    System.out.println("Registrar producto");
-                    view.mostrarMensaje("Que tipo de producto desea registrar?: "+"1. Articulos , 2. Paquete, 3. Servicios");
-                    int tipoProducto = leer.nextInt();
-                    if (tipoProducto == 1){
-                        view.mostrarMensaje("Ingrese el codigo del Articulo: ");
-                        String codigoA = leer.next();
-                        view.mostrarMensaje("Ingrese el nombre del Articulo: ");
-                        String nombreA = leer.next();
-                        view.mostrarMensaje("Ingrese el precio unitario del Articulo:");
-                        float precioU = leer.nextFloat();
-                        view.mostrarMensaje("Ingrese el IVA del Producto:");
-                        int IVA = leer.nextInt();
-                        Articulo articulo = new Articulo(codigoA, nombreA, precioU, TipoProducto.Limpieza, IVA);
-                        productos.add(articulo); // Guardar proveedor
+                        System.out.println("Registrar producto");
+                        view.mostrarMensaje("Que tipo de producto desea registrar?: "+"1. Articulos , 2. Paquete, 3. Servicios");
+                        int tipoProducto = leer.nextInt();
+                        if (tipoProducto == 1){
+                            view.mostrarMensaje("Ingrese el codigo del Articulo: ");
+                            String codigoA = leer.next();
+                            view.mostrarMensaje("Ingrese el nombre del Articulo: ");
+                            String nombreA = leer.next();
+                            view.mostrarMensaje("Ingrese el precio unitario del Articulo:");
+                            float precioU = leer.nextFloat();
+                            view.mostrarMensaje("Ingrese el IVA del Producto:");
+                            float IVA = leer.nextFloat();
+                            Articulo articulo = new Articulo(codigoA, nombreA, precioU, TipoProducto.Limpieza, IVA);
+                            productos.add(articulo); // Guardar proveedor
+                            view.mostrarMensaje("Articulo registrado correctamente.");
+
+                        }
+                        if (tipoProducto == 2){
+                            view.mostrarMensaje("Ingrese el codigo del Paquete: ");
+                            String codigoP= leer.next();
+                            view.mostrarMensaje("Ingrese el nombre del Paquete: ");
+                            String nombreP = leer.next();
+                            view.mostrarMensaje("Ingrese el precio del Paquete:");
+                            float precioU = leer.nextFloat();
+                            view.mostrarMensaje("Ingrese el peso del Paquete:");
+                            float peso = leer.nextInt();
+                            Paquete paquete = new Paquete(codigoP, nombreP, precioU, TipoProducto.Limpieza, peso);
+                            productos.add(paquete); // Guardar proveedor
+                            view.mostrarMensaje("Proveedor registrado correctamente.");
+
+                    }
+                    if (tipoProducto == 3 ){
+                        view.mostrarMensaje("Ingrese el codigo del Servicio proporcionado: ");
+                        String codigoS = leer.next();
+                        view.mostrarMensaje("Ingrese el nombre del Servicio Proporcionado: ");
+                        String nombreS = leer.next();
+                        view.mostrarMensaje("Ingrese el precio de la hora por el servicio:");
+                        float precioServicio = leer.nextFloat();
+                        view.mostrarMensaje("Ingrese cuanto tiempo se otorgo el servicio:");
+                        int tiempoHoras = leer.nextInt();
+                        Servicio servicio = new Servicio(codigoS, nombreS, precioServicio, TipoProducto.Limpieza, tiempoHoras);
+                        productos.add(servicio); // Guardar proveedor
                         view.mostrarMensaje("Proveedor registrado correctamente.");
 
                     }
@@ -67,6 +93,9 @@ public class App {
                     break;
                 case 5:
                     System.out.println("Listar Productos");
+                    for (int i = 0; i < productos.size(); i++){
+                        view.mostrarMensaje(productos.get(i).toString());
+                    }
                     break;
                 case 6:
                     System.out.println("Listar solicitudes de compra");

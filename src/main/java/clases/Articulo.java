@@ -20,7 +20,10 @@ public class Articulo extends Producto {
 
     @Override
     public float calcularCosto() {
-        return this.getPrecioU() *  IVA;
+
+        float resIva;
+        resIva = this.getPrecioU() *  IVA;
+        return this.getPrecioU() - resIva;
     }
 
     @Override
