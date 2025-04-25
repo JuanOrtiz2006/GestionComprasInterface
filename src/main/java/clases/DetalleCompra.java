@@ -46,10 +46,10 @@ public class DetalleCompra implements Calculable {
 
     @Override
     public String toString() {
-        return "Producto: " + producto.getNombre() + "\n"
-                + "Cantidad: " + cantidad + "\n"
-                + "Descripción: " + descripcion + "\n"
-                + "Costo unitario (calculado): " + producto.calcularCosto() + "\n"
-                + "Costo total: " + calcularCostoTotal();
+        return "| " + producto.getNombre() + " | Cant: "
+                +  cantidad + " | "
+                + descripcion + " | PrecioU: "
+                + producto.calcularCosto() + " | PrecioT: "
+                + calcularCostoTotal() + " |";
     }
 }

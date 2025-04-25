@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class SolicitudDeCompra {
-    private int idSolicitud;
+    private int id;
     private EstadoSolicitud estadoSolicitud;
     private GregorianCalendar fechaSolicitud;
     private Empleado solicitante;
@@ -17,8 +17,8 @@ public class SolicitudDeCompra {
         this.detalleCompras = new ArrayList<>();
     }
 
-    public SolicitudDeCompra(int idSolicitud, EstadoSolicitud estadoSolicitud, GregorianCalendar fechaSolicitud, Empleado solicitante, List<DetalleCompra> detalleCompras) {
-        this.idSolicitud = idSolicitud;
+    public SolicitudDeCompra(int id, EstadoSolicitud estadoSolicitud, GregorianCalendar fechaSolicitud, Empleado solicitante, List<DetalleCompra> detalleCompras) {
+        this.id = id;
         this.estadoSolicitud = estadoSolicitud;
         this.fechaSolicitud = fechaSolicitud;
         this.solicitante = solicitante;
@@ -26,11 +26,11 @@ public class SolicitudDeCompra {
     }
 
     public int getIdSolicitud() {
-        return idSolicitud;
+        return id;
     }
 
-    public void setIdSolicitud(int idSolicitud) {
-        this.idSolicitud = idSolicitud;
+    public void setIdSolicitud(int id) {
+        this.id = id;
     }
 
     public EstadoSolicitud getEstadoSolicitud() {
@@ -69,6 +69,11 @@ public class SolicitudDeCompra {
     @Override
 
     public String toString(){
-        return "";
+
+        return "Codigo: " + id +
+                "\nFecha: " + fechaSolicitud +
+                "\n Solicitante:" + solicitante +
+                "\n" + detalleCompras +
+                "\n Estado: " +estadoSolicitud;
     }
 }

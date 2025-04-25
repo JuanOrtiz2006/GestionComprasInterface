@@ -19,4 +19,9 @@ public class Empleado extends Persona {
         this.departamento = departamento;
     }
 
+    @Override
+
+    public String toString(){
+        return super.toString();
+    }
 }
