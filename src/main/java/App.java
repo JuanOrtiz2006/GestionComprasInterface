@@ -1,4 +1,8 @@
-import clases.*;
+import clases.Articulo;
+import clases.Proveedor;
+import clases.ViewConsole;
+import clases.Servicio;
+import clases.Paquete;
 import enums.TipoProducto;
 import clases.Producto;
 import java.util.ArrayList;
@@ -21,50 +25,25 @@ public class App {
             opcion = leer.nextInt();
             switch (opcion) {
                 case 1:
-                    view.mostrarMensaje("Registrar proveedor");
-                    view.mostrarMensaje("Ingrese la Empresa");
-                    String empresa = leer.next();
-                    view.mostrarMensaje("Ingrese el nombre del proveedor: ");
-                    String nombre = leer.next();
-                    view.mostrarMensaje("Ingrese el correo del proveedor:");
-                    String correo = leer.next();
-                    view.mostrarMensaje("Ingrese la cedula del proveedor:");
-                    String cedula = leer.next();
-                    Proveedor proveedor = new Proveedor(empresa, nombre, correo, cedula);
+                    String[] registroP = view.registroProvedor();
+                    Proveedor proveedor = new Proveedor(registroP[0],registroP[1],registroP[2],registroP[3]);
                     proveedores.add(proveedor); // Guardar proveedor
                     view.mostrarMensaje("Proveedor registrado correctamente...");
 
                     break;
                 case 2:
-                        System.out.println("Registrar producto");
-                        view.mostrarMensaje("Que tipo de producto desea registrar?: "+"1. Articulos , 2. Paquete, 3. Servicios");
-                        int tipoProducto = leer.nextInt();
-                        if (tipoProducto == 1){
-                            view.mostrarMensaje("Ingrese el codigo del Articulo: ");
-                            String codigoA = leer.next();
-                            view.mostrarMensaje("Ingrese el nombre del Articulo: ");
-                            String nombreA = leer.next();
-                            view.mostrarMensaje("Ingrese el precio unitario del Articulo:");
-                            float precioU = leer.nextFloat();
-                            view.mostrarMensaje("Ingrese el IVA del Producto:");
-                            float IVA = leer.nextFloat();
-                            Articulo articulo = new Articulo(codigoA, nombreA, precioU, TipoProducto.Limpieza, IVA);
-                            productos.add(articulo); // Guardar proveedor
-                            view.mostrarMensaje("Articulo registrado correctamente.");
+                    int tipoProducto = view.tipoProducto();
+                    if (tipoProducto == 1){
+                        Articulo articulo = view.registrarArticulo();
+                        productos.add(articulo); // Agrega el articulo a la lista de prodcutos
+                        view.mostrarMensaje("Articulo registrado correctamente.");
 
-                        }
-                        if (tipoProducto == 2){
-                            view.mostrarMensaje("Ingrese el codigo del Paquete: ");
-                            String codigoP= leer.next();
-                            view.mostrarMensaje("Ingrese el nombre del Paquete: ");
-                            String nombreP = leer.next();
-                            view.mostrarMensaje("Ingrese el precio del Paquete:");
-                            float precioU = leer.nextFloat();
-                            view.mostrarMensaje("Ingrese el peso del Paquete:");
-                            float peso = leer.nextInt();
-                            Paquete paquete = new Paquete(codigoP, nombreP, precioU, TipoProducto.Limpieza, peso);
-                            productos.add(paquete); // Guardar proveedor
-                            view.mostrarMensaje("Proveedor registrado correctamente.");
+                    }
+
+                    if (tipoProducto == 2){
+                        Paquete paquete = view.registrarPaquete();
+                        productos.add(paquete); // Guardar proveedor
+                        view.mostrarMensaje("Paquete registrado correctamente.");
 
                     }
                     if (tipoProducto == 3 ){
@@ -78,9 +57,7 @@ public class App {
                         int tiempoHoras = leer.nextInt();
                         Servicio servicio = new Servicio(codigoS, nombreS, precioServicio, TipoProducto.Limpieza, tiempoHoras);
                         productos.add(servicio); // Guardar proveedor
-                        view.mostrarMensaje("Proveedor registrado correctamente.");
-
-                    }
+                        view.mostrarMensaje("Proveedor registrado correctamente.");}
 
                     break;
                 case 3:
