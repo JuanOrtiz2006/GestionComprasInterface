@@ -34,7 +34,7 @@ public class App {
                     String cedula = leer.next();
                     Proveedor proveedor = new Proveedor(empresa, nombre, correo, cedula);
                     proveedores.add(proveedor); // Guardar proveedor
-                    view.mostrarMensaje("Proveedor registrado correctamente.");
+                    view.mostrarMensaje("Proveedor registrado correctamente...");
 
                     break;
                 case 2:
