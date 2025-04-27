@@ -51,7 +51,7 @@ public class App {
                     if (tipoProducto == 3 ){
                         Servicio servicio = view.registrarServicio();
                         productos.add(servicio); // Guardar proveedor
-                        view.mostrarMensaje("Servicio registrado correctamente.");}
+                        }
 
                     break;
                 case 3:
