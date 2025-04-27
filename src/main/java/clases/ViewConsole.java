@@ -100,4 +100,29 @@ public class ViewConsole {
         return new Paquete(codigo, nombre, precioU, tipoSeleccionado, peso);
     }
 
+    public Servicio registrarServicio(){
+        mostrarMensaje("Ingrese el codigo del Servicio proporcionado: ");
+        String codigo = leer.next();
+        mostrarMensaje("Ingrese el nombre del Servicio Proporcionado: ");
+        String nombre = leer.next();
+        mostrarMensaje("Ingrese el precio de la hora por el servicio:");
+        float precio = leer.nextFloat();
+        mostrarMensaje("Ingrese cuanto tiempo se otorgo el servicio:");
+        int tiempoHoras = leer.nextInt();
+
+        mostrarMensaje("Seleccione el tipo:");
+        TipoProducto[] tipos = TipoProducto.values();//Crea un vector con todos los tipos de producto
+        for (int i = 0; i < tipos.length; i++) {//Muestra los tipos al usuario
+            System.out.println((i + 1) + ". " + tipos[i]);
+        }
+        int opcion = leer.nextInt();
+        while (opcion < 1 || opcion > tipos.length) {//Verifica que la opcion ingresada es correcta
+            mostrarMensaje("Opción inválida. Intente nuevamente:");
+            opcion = leer.nextInt();
+        }
+        TipoProducto tipoSeleccionado = tipos[opcion - 1];//Registra la respuesta
+        //Crea un articulo en base a lo que ingreso el usuario
+        return new Servicio(codigo, nombre, precio, tipoSeleccionado, tiempoHoras);
+    }
+
 }
