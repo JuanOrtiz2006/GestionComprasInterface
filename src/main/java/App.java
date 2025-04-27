@@ -2,7 +2,7 @@ import clases.*;
 import enums.EstadoSolicitud;
 import enums.TipoDepartamento;
 import enums.TipoProducto;
-
+import enums.EstadoSolicitud;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.GregorianCalendar;
@@ -57,9 +57,23 @@ public class App {
                     view.mostrarMensaje("Registrar solicitud de compra");
                     view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
                     int codigoSC = leer.nextInt();
-                    view.mostrarMensaje("Ingrese el estado de la solicitud: SOlICITADA, EN_REVISION, APROBADA, RECHAZADA");
-                    String nombreSC = leer.next().toUpperCase();
-                    EstadoSolicitud estadoSolicitud = EstadoSolicitud.valueOf(nombreSC);
+
+                    view.mostrarMensaje("Ingrese el estado de la solicitud:");
+                    EstadoSolicitud[] estados = EstadoSolicitud.values();
+                    for (int i = 0; i < estados.length; i++) {
+                        System.out.println((i + 1) + ". " + estados[i]);
+                    }
+
+                    int respuesta = leer.nextInt();
+                    leer.nextLine();  // Limpiar el buffer de entrada
+
+                    while (respuesta < 1 || opcion > estados.length) {
+                        view.mostrarMensaje("Opción inválida. Intente nuevamente:");
+                        respuesta = leer.nextInt();
+                        leer.nextLine();  // Limpiar el buffer de entrada
+                    }
+
+                    EstadoSolicitud estadoSolicitud = estados[respuesta - 1];
 
                     GregorianCalendar calendario = view.fechaSolicitud();
 
@@ -134,22 +148,9 @@ public class App {
                     view.mostrarMensaje("Calcular total de una solicitud");
                     break;
                 case 12:
-                view.mostrarMensaje("Ingresar un empleado con su respectivo departamento: ");
-                view.mostrarMensaje("Ingrese el nombre del Empleado: ");
-                String nombreE = leer.next();
-                view.mostrarMensaje("Ingrese el correo del Empleado: ");
-                String correoE = leer.next();
-                view.mostrarMensaje("Ingrese la cedula del Empleado: :");
-                String cedulaE = leer.next();
-                view.mostrarMensaje("Ingrese el tipo de Departamento del proveedor:");
-                String tipoD = leer.next().toUpperCase();
-
-                TipoDepartamento tipoDepartamento = TipoDepartamento.valueOf(tipoD);
-                int idDepartamento = tipoDepartamento.ordinal() + 1;
-                Departamento departamento = new Departamento(idDepartamento, tipoDepartamento.name());
-                Empleado empleado = new Empleado(nombreE, correoE, cedulaE, departamento);
-                empleados.add(empleado); // Guardar empleado
-                view.mostrarMensaje("Empleado registrado correctamente.");
+                    Empleado empleado = view.registrarEmpleado();
+                    empleados.add(empleado); // Guardar empleado
+                    view.mostrarMensaje("Empleado registrado correctamente.");
 
                 break;
                 case 13:
