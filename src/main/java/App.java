@@ -2,7 +2,7 @@ import clases.*;
 import enums.EstadoSolicitud;
 import enums.TipoDepartamento;
 import enums.TipoProducto;
-
+import enums.EstadoSolicitud;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.GregorianCalendar;
@@ -48,35 +48,34 @@ public class App {
 
                     }
                     if (tipoProducto == 3 ){
-                        view.mostrarMensaje("Ingrese el codigo del Servicio proporcionado: ");
-                        String codigoS = leer.next();
-                        view.mostrarMensaje("Ingrese el nombre del Servicio Proporcionado: ");
-                        String nombreS = leer.next();
-                        view.mostrarMensaje("Ingrese el precio de la hora por el servicio:");
-                        float precioServicio = leer.nextFloat();
-                        view.mostrarMensaje("Ingrese cuanto tiempo se otorgo el servicio:");
-                        int tiempoHoras = leer.nextInt();
-                        Servicio servicio = new Servicio(codigoS, nombreS, precioServicio, TipoProducto.Limpieza, tiempoHoras);
+                        Servicio servicio = view.registrarServicio();
                         productos.add(servicio); // Guardar proveedor
-                        view.mostrarMensaje("Proveedor registrado correctamente.");}
+                        view.mostrarMensaje("Servicio registrado correctamente.");}
 
                     break;
                 case 3:
-                    System.out.println("Registrar solicitud de compra");
+                    view.mostrarMensaje("Registrar solicitud de compra");
                     view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
                     int codigoSC = leer.nextInt();
-                    view.mostrarMensaje("Ingrese el estado de la solicitud: SOlICITADA, EN_REVISION, APROBADA, RECHAZADA");
-                    String nombreSC = leer.next().toUpperCase();
-                    EstadoSolicitud estadoSolicitud = EstadoSolicitud.valueOf(nombreSC);
 
-                    view.mostrarMensaje("Fecha de Solicitud----- ");
-                    view.mostrarMensaje("Ingrese el dia de la fecha de la solicitud: ");
-                    int dia  = leer.nextInt() ;
-                    view.mostrarMensaje("Ingrese el mes de la fecha de la solicitud: (1-12) ");
-                    int mes  = leer.nextInt() -  1 ;
-                    view.mostrarMensaje("Ingrese el año de la fecha de la solicitud: ");
-                    int ano  = leer.nextInt();
-                    GregorianCalendar calendario = new GregorianCalendar(ano, mes, dia);
+                    view.mostrarMensaje("Ingrese el estado de la solicitud:");
+                    EstadoSolicitud[] estados = EstadoSolicitud.values();
+                    for (int i = 0; i < estados.length; i++) {
+                        System.out.println((i + 1) + ". " + estados[i]);
+                    }
+
+                    int respuesta = leer.nextInt();
+                    leer.nextLine();  // Limpiar el buffer de entrada
+
+                    while (respuesta < 1 || opcion > estados.length) {
+                        view.mostrarMensaje("Opción inválida. Intente nuevamente:");
+                        respuesta = leer.nextInt();
+                        leer.nextLine();  // Limpiar el buffer de entrada
+                    }
+
+                    EstadoSolicitud estadoSolicitud = estados[respuesta - 1];
+
+                    GregorianCalendar calendario = view.fechaSolicitud();
 
                     Empleado empleadoEncontrado = null;
                     while (empleadoEncontrado == null) {
@@ -91,34 +90,31 @@ public class App {
                     }
                     view.mostrarMensaje("Empleado encontrado: " + empleadoEncontrado.getNombre());
 
-                    SolicitudDeCompra solicitudDeCompra = new SolicitudDeCompra(codigoSC, estadoSolicitud, calendario,empleadoEncontrado, /*PON AQUI EL DETALLE DE COMPRAS*/ );
+                    ArrayList<DetalleCompra> detalleCompras = view.detalleCompra(productos);
+                    SolicitudDeCompra solicitudDeCompra = new SolicitudDeCompra(codigoSC, estadoSolicitud, calendario,empleadoEncontrado, detalleCompras );
                     solicitudes.add(solicitudDeCompra);
                     view.mostrarMensaje("Solicitud de compra registrada correctamente:");
-
-
-
-
                     break;
                 case 4:
-                    System.out.println("Listar Proveedores");
+                    view.mostrarMensaje("Listar Proveedores");
                     for (int i = 0; i < proveedores.size(); i++){
                         view.mostrarMensaje(proveedores.get(i).toString());
                     }
                     break;
                 case 5:
-                    System.out.println("Listar Productos");
+                    view.mostrarMensaje("Listar Productos");
                     for (int i = 0; i < productos.size(); i++){
                         view.mostrarMensaje(productos.get(i).toString());
                     }
                     break;
                 case 6:
-                    System.out.println("Listar solicitudes de compras: ");
+                    view.mostrarMensaje("Listar solicitudes de compras: ");
                     for (int i = 0; i < solicitudes.size(); i++){
                         view.mostrarMensaje(solicitudes.get(i).toString());
                     }
                     break;
                 case 7:
-                    System.out.println("Buscar proveedor por Cedula ");
+                    view.mostrarMensaje("Buscar proveedor por Cedula ");
                     view.mostrarMensaje("Ingrese la cedula del proveedor a buscar: ");
                     String cedulaBuscar = leer.next();
                     Proveedor proveedorEncontrado = buscarProveedorPorCedula(proveedores, cedulaBuscar);
@@ -130,7 +126,7 @@ public class App {
                     }
                     break;
                 case 8:
-                    System.out.println("Buscar producto por nombre");
+                    view.mostrarMensaje("Buscar producto por nombre");
                     view.mostrarMensaje("Ingrese el nombre del producto a buscar: ");
                     String nombreEnc = leer.next();
                     Producto encontrarProducto = buscarProductoPorNombre(productos, nombreEnc);
@@ -143,31 +139,18 @@ public class App {
                     break;
 
                 case 9:
-                    System.out.println("Buscar solicitud por número");
+                    view.mostrarMensaje("Buscar solicitud por número");
                     break;
                 case 10:
-                    System.out.println("Aprobar / Rechazar solicitud de compra");
+                    view.mostrarMensaje("Aprobar / Rechazar solicitud de compra");
                     break;
                 case 11:
-                    System.out.println("Calcular total de una solicitud");
+                    view.mostrarMensaje("Calcular total de una solicitud");
                     break;
                 case 12:
-                System.out.println("Ingresar un empleado con su respectivo departamento: ");
-                view.mostrarMensaje("Ingrese el nombre del Empleado: ");
-                String nombreE = leer.next();
-                view.mostrarMensaje("Ingrese el correo del Empleado: ");
-                String correoE = leer.next();
-                view.mostrarMensaje("Ingrese la cedula del Empleado: :");
-                String cedulaE = leer.next();
-                view.mostrarMensaje("Ingrese el tipo de Departamento del proveedor:");
-                String tipoD = leer.next().toUpperCase();
-
-                TipoDepartamento tipoDepartamento = TipoDepartamento.valueOf(tipoD);
-                int idDepartamento = tipoDepartamento.ordinal() + 1;
-                Departamento departamento = new Departamento(idDepartamento, tipoDepartamento.name());
-                Empleado empleado = new Empleado(nombreE, correoE, cedulaE, departamento);
-                empleados.add(empleado); // Guardar empleado
-                view.mostrarMensaje("Empleado registrado correctamente.");
+                    Empleado empleado = view.registrarEmpleado();
+                    empleados.add(empleado); // Guardar empleado
+                    view.mostrarMensaje("Empleado registrado correctamente.");
 
                 break;
                 case 13:
@@ -208,6 +191,8 @@ public class App {
                 return e;
             }
         }
+
         return null;
     }
+
 }
