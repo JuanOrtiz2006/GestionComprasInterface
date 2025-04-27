@@ -7,6 +7,8 @@ import enums.TipoProducto;
 import clases.Producto;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.GregorianCalendar;
+
 
 public class App {
     public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class App {
         ArrayList<Producto> productos = new ArrayList<>();
         Scanner leer = new Scanner(System.in);
         ViewConsole view = new ViewConsole();
+
 
 
         System.out.println("Sistema de Gestión de Compras ERP");
@@ -62,6 +65,23 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Registrar solicitud de compra");
+                    view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
+                    String codigoSC = leer.next();
+                    view.mostrarMensaje("Ingrese el estado de la solicitud: ");
+                    String nombreSC = leer.next();
+                    view.mostrarMensaje("Fecha de Solicitud----- ");
+                    view.mostrarMensaje("Ingrese el dia de la fecha de la solicitud: ");
+                    int dia  = leer.nextInt() ;
+                    view.mostrarMensaje("Ingrese el mes de la fecha de la solicitud: (1-12) ");
+                    int mes  = leer.nextInt() -  1 ;
+                    view.mostrarMensaje("Ingrese el año de la fecha de la solicitud: ");
+                    int ano  = leer.nextInt();
+                    GregorianCalendar calendario = new GregorianCalendar(ano, mes, dia);
+                    view.mostrarMensaje("Ingrese le codigo del empleado que realizo la solicitud: ");
+
+                    view.mostrarMensaje("Ingrese cuanto tiempo se otorgo el servicio:");
+                    int tiempoHoras = leer.nextInt();
+
                     break;
                 case 4:
                     System.out.println("Listar Proveedores");
@@ -94,10 +114,10 @@ public class App {
                     System.out.println("Buscar producto por nombre");
                     view.mostrarMensaje("Ingrese el nombre del producto a buscar: ");
                     String nombreEnc = leer.next();
-                    Producto encontrarProdcuto = buscarProductoPorNombre(productos, nombreEnc);
-                    if (encontrarProdcuto != null) {
+                    Producto encontrarProducto = buscarProductoPorNombre(productos, nombreEnc);
+                    if (encontrarProducto != null) {
                         view.mostrarMensaje("Producto encontrado:");
-                        view.mostrarMensaje(encontrarProdcuto.toString());
+                        view.mostrarMensaje(encontrarProducto.toString());
                     } else {
                         view.mostrarMensaje("Producto no encontrado.");
                     }
@@ -113,6 +133,19 @@ public class App {
                     System.out.println("Calcular total de una solicitud");
                     break;
                 case 12:
+                    System.out.println("Ingresar un empleado con su respectivo departamento: ");
+
+                    view.mostrarMensaje("Ingrese la Empresa");
+                    String empresa = leer.next();
+                    view.mostrarMensaje("Ingrese el nombre del proveedor: ");
+                    String nombre = leer.next();
+                    view.mostrarMensaje("Ingrese el correo del proveedor:");
+                    String correo = leer.next();
+                    view.mostrarMensaje("Ingrese la cedula del proveedor:");
+                    String cedula = leer.next();
+
+                    break;
+                case 13:
                     System.out.println("Salir");
                     return;
                 default:
