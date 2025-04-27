@@ -1,4 +1,6 @@
 package clases;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import enums.TipoProducto;
 public class ViewConsole {
@@ -126,6 +128,37 @@ public class ViewConsole {
         return new Servicio(codigo, nombre, precio, tipoSeleccionado, tiempoHoras);
     }
 
+
+    public GregorianCalendar fechaSolicitud(){
+        mostrarMensaje("Fecha de Solicitud----- ");
+        mostrarMensaje("Ingrese el dia de la fecha de la solicitud: ");
+        int dia  = leer.nextInt() ;
+        mostrarMensaje("Ingrese el mes de la fecha de la solicitud: (1-12) ");
+        int mes  = leer.nextInt() -  1 ;
+        mostrarMensaje("Ingrese el año de la fecha de la solicitud: ");
+        int anio  = leer.nextInt();
+        GregorianCalendar calendario = new GregorianCalendar(anio, mes, dia);
+        return calendario;
+    }
+
+    public ArrayList<DetalleCompra> detalleCompra (ArrayList<Producto> productos){
+        ArrayList<DetalleCompra> detallesCompra = new ArrayList<>();  // Lista para almacenar los detalles de compra
+        mostrarMensaje("Detalles de compra");
+
+        int tamaño = productos.size();
+        for (int i=0; i<tamaño; i++){
+            mostrarMensaje("Producto: " + productos.get(i).getNombre()) ;
+            mostrarMensaje("Cantidad:");
+            int cantidad = leer.nextInt();
+            mostrarMensaje("Descripcio: ");
+            String descripcion = leer.next();
+            DetalleCompra detalleCompra = new DetalleCompra(cantidad,productos.get(i),descripcion);
+            detallesCompra.add(detalleCompra);
+        }
+
+        return detallesCompra;
+
+    }
 
 
 
