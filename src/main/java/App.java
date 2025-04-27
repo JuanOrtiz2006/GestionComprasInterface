@@ -73,13 +73,34 @@ public class App {
                 case 6:
                     System.out.println("Listar solicitudes de compra");
 
+                    System.out.println("Listar solicitudes de compras: ");
+
                     break;
                 case 7:
-                    System.out.println("Buscar proveedor por ID");
+                    System.out.println("Buscar proveedor por Cedula ");
+                    view.mostrarMensaje("Ingrese la cedula del proveedor a buscar: ");
+                    String cedulaBuscar = leer.next();
+                    Proveedor proveedorEncontrado = buscarProveedorPorCedula(proveedores, cedulaBuscar);
+                    if (proveedorEncontrado != null) {
+                        view.mostrarMensaje("Proveedor encontrado:");
+                        view.mostrarMensaje(proveedorEncontrado.toString());
+                    } else {
+                        view.mostrarMensaje("Proveedor no encontrado.");
+                    }
                     break;
                 case 8:
                     System.out.println("Buscar producto por nombre");
+                    view.mostrarMensaje("Ingrese el nombre del producto a buscar: ");
+                    String nombreEnc = leer.next();
+                    Producto encontrarProdcuto = buscarProductoPorNombre(productos, nombreEnc);
+                    if (encontrarProdcuto != null) {
+                        view.mostrarMensaje("Producto encontrado:");
+                        view.mostrarMensaje(encontrarProdcuto.toString());
+                    } else {
+                        view.mostrarMensaje("Producto no encontrado.");
+                    }
                     break;
+
                 case 9:
                     System.out.println("Buscar solicitud por número");
                     break;
@@ -95,6 +116,29 @@ public class App {
                 default:
                     System.out.println("Opción no válida");
             }
+
+
+
+
         }
+
+    }
+
+    public static Proveedor buscarProveedorPorCedula(ArrayList<Proveedor> lista, String cedula) {
+        for (Proveedor p : lista) {
+            if (p.getCedula().equalsIgnoreCase(cedula)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public static Producto buscarProductoPorNombre(ArrayList<Producto> lista, String nombre) {
+        for (Producto p : lista) {
+            if (p.getNombre().equalsIgnoreCase(nombre)) {
+                return p;
+            }
+        }
+        return null;
     }
 }
