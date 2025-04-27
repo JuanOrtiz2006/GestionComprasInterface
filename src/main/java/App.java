@@ -1,17 +1,18 @@
-import clases.Articulo;
-import clases.Proveedor;
-import clases.ViewConsole;
-import clases.Servicio;
-import clases.Paquete;
+import clases.*;
+import enums.EstadoSolicitud;
+import enums.TipoDepartamento;
 import enums.TipoProducto;
-import clases.Producto;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.GregorianCalendar;
 
 public class App {
     public static void main(String[] args) {
         ArrayList<Proveedor> proveedores = new ArrayList<>();
         ArrayList<Producto> productos = new ArrayList<>();
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        ArrayList<SolicitudDeCompra> solicitudes = new ArrayList<>();
         Scanner leer = new Scanner(System.in);
         ViewConsole view = new ViewConsole();
 
@@ -62,6 +63,41 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Registrar solicitud de compra");
+                    view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
+                    int codigoSC = leer.nextInt();
+                    view.mostrarMensaje("Ingrese el estado de la solicitud: SOlICITADA, EN_REVISION, APROBADA, RECHAZADA");
+                    String nombreSC = leer.next().toUpperCase();
+                    EstadoSolicitud estadoSolicitud = EstadoSolicitud.valueOf(nombreSC);
+
+                    view.mostrarMensaje("Fecha de Solicitud----- ");
+                    view.mostrarMensaje("Ingrese el dia de la fecha de la solicitud: ");
+                    int dia  = leer.nextInt() ;
+                    view.mostrarMensaje("Ingrese el mes de la fecha de la solicitud: (1-12) ");
+                    int mes  = leer.nextInt() -  1 ;
+                    view.mostrarMensaje("Ingrese el año de la fecha de la solicitud: ");
+                    int ano  = leer.nextInt();
+                    GregorianCalendar calendario = new GregorianCalendar(ano, mes, dia);
+
+                    Empleado empleadoEncontrado = null;
+                    while (empleadoEncontrado == null) {
+                        view.mostrarMensaje("Ingrese la cédula del empleado que realizó la solicitud: ");
+                        String cedulaEmpleado = leer.next();
+
+                        empleadoEncontrado = buscarEmpleadoPorCedula(empleados, cedulaEmpleado);
+
+                        if (empleadoEncontrado == null) {
+                            view.mostrarMensaje("Empleado no encontrado. Intente de nuevo.");
+                        }
+                    }
+                    view.mostrarMensaje("Empleado encontrado: " + empleadoEncontrado.getNombre());
+
+                    SolicitudDeCompra solicitudDeCompra = new SolicitudDeCompra(codigoSC, estadoSolicitud, calendario,empleadoEncontrado, /*PON AQUI EL DETALLE DE COMPRAS*/ );
+                    solicitudes.add(solicitudDeCompra);
+                    view.mostrarMensaje("Solicitud de compra registrada correctamente:");
+
+
+
+
                     break;
                 case 4:
                     System.out.println("Listar Proveedores");
@@ -77,6 +113,9 @@ public class App {
                     break;
                 case 6:
                     System.out.println("Listar solicitudes de compras: ");
+                    for (int i = 0; i < solicitudes.size(); i++){
+                        view.mostrarMensaje(solicitudes.get(i).toString());
+                    }
                     break;
                 case 7:
                     System.out.println("Buscar proveedor por Cedula ");
@@ -94,10 +133,10 @@ public class App {
                     System.out.println("Buscar producto por nombre");
                     view.mostrarMensaje("Ingrese el nombre del producto a buscar: ");
                     String nombreEnc = leer.next();
-                    Producto encontrarProdcuto = buscarProductoPorNombre(productos, nombreEnc);
-                    if (encontrarProdcuto != null) {
+                    Producto encontrarProducto = buscarProductoPorNombre(productos, nombreEnc);
+                    if (encontrarProducto != null) {
                         view.mostrarMensaje("Producto encontrado:");
-                        view.mostrarMensaje(encontrarProdcuto.toString());
+                        view.mostrarMensaje(encontrarProducto.toString());
                     } else {
                         view.mostrarMensaje("Producto no encontrado.");
                     }
@@ -113,6 +152,25 @@ public class App {
                     System.out.println("Calcular total de una solicitud");
                     break;
                 case 12:
+                System.out.println("Ingresar un empleado con su respectivo departamento: ");
+                view.mostrarMensaje("Ingrese el nombre del Empleado: ");
+                String nombreE = leer.next();
+                view.mostrarMensaje("Ingrese el correo del Empleado: ");
+                String correoE = leer.next();
+                view.mostrarMensaje("Ingrese la cedula del Empleado: :");
+                String cedulaE = leer.next();
+                view.mostrarMensaje("Ingrese el tipo de Departamento del proveedor:");
+                String tipoD = leer.next().toUpperCase();
+
+                TipoDepartamento tipoDepartamento = TipoDepartamento.valueOf(tipoD);
+                int idDepartamento = tipoDepartamento.ordinal() + 1;
+                Departamento departamento = new Departamento(idDepartamento, tipoDepartamento.name());
+                Empleado empleado = new Empleado(nombreE, correoE, cedulaE, departamento);
+                empleados.add(empleado); // Guardar empleado
+                view.mostrarMensaje("Empleado registrado correctamente.");
+
+                break;
+                case 13:
                     System.out.println("Salir");
                     return;
                 default:
@@ -139,6 +197,15 @@ public class App {
         for (Producto p : lista) {
             if (p.getNombre().equalsIgnoreCase(nombre)) {
                 return p;
+            }
+        }
+        return null;
+    }
+
+    public static Empleado buscarEmpleadoPorCedula(ArrayList<Empleado> lista, String cedula) {
+        for (Empleado e : lista) {
+            if (e.getCedula().equalsIgnoreCase(cedula)) {
+                return e;
             }
         }
         return null;

@@ -20,7 +20,8 @@ public class ViewConsole {
                 "9. Buscar solicitud por número\n" +
                 "10. Aprobar / Rechazar solicitud de compra\n" +
                 "11. Calcular total de una solicitud\n" +
-                "12. Salir\n" +
+                "12. Ingresar un empleado\n" +
+                "13. Salir\n" +
                 "Seleccione una opción:");
     }
 
@@ -124,5 +125,9 @@ public class ViewConsole {
         //Crea un articulo en base a lo que ingreso el usuario
         return new Servicio(codigo, nombre, precio, tipoSeleccionado, tiempoHoras);
     }
+
+
+
+
 
 }

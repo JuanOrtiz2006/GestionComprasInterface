@@ -4,6 +4,6 @@ public enum TipoDepartamento {
 
     SECRETARIA,
     ADMINISTRACION,
-      EJECUTIVO     ,
+    EJECUTIVO     ,
     RRHH
 }
