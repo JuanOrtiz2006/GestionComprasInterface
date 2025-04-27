@@ -16,6 +16,7 @@ public class App {
         ViewConsole view = new ViewConsole();
 
 
+
         System.out.println("Sistema de Gestión de Compras ERP");
 
 
