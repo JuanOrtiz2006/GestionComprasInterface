@@ -65,12 +65,6 @@ public class SolicitudDeCompra {
         return detalleCompras;
     }
 
-    private String getFechaFormateada() {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        return formato.format(fechaSolicitud.getTime());
-    }
-
-
     public float calcularTotalSolicitud() {
         float total = 0;
         for (DetalleCompra detalle : detalleCompras) {
@@ -80,11 +74,11 @@ public class SolicitudDeCompra {
     }
 
     @Override
-
     public String toString(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         return "Codigo:" + id +
-                "\nFecha: " + getFechaFormateada() +
+                "\nFecha: " + formato.format(fechaSolicitud.getTime()) +
                 "\n Solicitante:" + solicitante +
                 "\n" + detalleCompras +
                 "\n Estado: " +estadoSolicitud;

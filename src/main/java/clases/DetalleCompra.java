@@ -1,7 +1,5 @@
 package clases;
-
 public class DetalleCompra implements Calculable {
-
     private int cantidad;
     private Producto producto;
     private String descripcion;
@@ -14,7 +12,6 @@ public class DetalleCompra implements Calculable {
 
     public DetalleCompra() {
     }
-
     public int getCantidad() {
         return cantidad;
     }
@@ -38,7 +35,6 @@ public class DetalleCompra implements Calculable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     @Override
     public double calcularCostoTotal() {
         return cantidad * producto.calcularCosto();

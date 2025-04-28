@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 public class Departamento {
 
-    private int idDepartamento;
-    private String nombreDepartamento;
+    private int id;
+    private String nombre;
     private List<Empleado> empleados;
 
-    public Departamento(int idDepartamento, String nombreDepartamento) {
-        this.idDepartamento = idDepartamento;
-        this.nombreDepartamento = nombreDepartamento;
+    public Departamento(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
         empleados = new ArrayList<>();
     }
 
@@ -19,19 +19,19 @@ public class Departamento {
 
 
     public int getIdDepartamento() {
-        return idDepartamento;
+        return id;
     }
 
-    public void setIdDepartamento(int idDepartamento) {
-        this.idDepartamento = idDepartamento;
+    public void setIdDepartamento(int id) {
+        this.id = id;
     }
 
     public String getNombreDepartamento() {
-        return nombreDepartamento;
+        return nombre;
     }
 
-    public void setNombreDepartamento(String nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
+    public void setNombreDepartamento(String nombre) {
+        this.nombre = nombre;
     }
 
     public void addEmpleados(Empleado empleado) {
@@ -48,5 +48,4 @@ public class Departamento {
     public String toString(){
         return "";
     }
-
 }

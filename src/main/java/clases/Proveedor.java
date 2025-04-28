@@ -1,5 +1,4 @@
 package clases;
-import java.util.ArrayList;
 public class Proveedor extends Persona{
     private String empresa;
 
@@ -20,8 +19,6 @@ public class Proveedor extends Persona{
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
     }
-
-
 
     @Override
     public String toString(){
