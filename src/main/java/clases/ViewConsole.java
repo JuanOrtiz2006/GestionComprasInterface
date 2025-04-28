@@ -221,7 +221,7 @@ public class ViewConsole {
         String correoE = leer.nextLine();
         mostrarMensaje("Ingrese la cedula del Empleado: :");
         String cedulaE = leer.nextLine();
-        mostrarMensaje("Ingrese el tipo de Departamento del proveedor:");
+        mostrarMensaje("Ingrese el tipo de Departamento del Empleado:");
         TipoDepartamento[] departamentos = TipoDepartamento.values();
         for (int i = 0; i < departamentos.length; i++) {
             System.out.println((i + 1) + ". " + departamentos[i]);
