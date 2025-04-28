@@ -1,7 +1,10 @@
 
 # Práctica de laboratorio 01: Diseño y desarrollo de una aplicación orientada a objetos utilizando Java
 ## Diagrama UML
-![alt text](<WhatsApp Image 2025-04-27 at 23.52.10-1.jpeg>)
+![image](https://github.com/user-attachments/assets/5e32f394-8887-410d-914b-ee7413e3f6bd)
+![image](https://github.com/user-attachments/assets/2f5551fd-9764-4d76-aa9b-d7add44d209c)
+
+
 ## 📌 Información General
 
 - **Título:** Práctica de laboratorio 01: Diseño y desarrollo de una aplicación orientada a objetos utilizando Java
