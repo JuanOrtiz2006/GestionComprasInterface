@@ -1,7 +1,7 @@
 package enums;
 
 public enum EstadoSolicitud {
-    SOlICITADA,
+    SOLICITADA,
     EN_REVISION,
     APROBADA,
     RECHAZADA

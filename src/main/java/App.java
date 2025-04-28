@@ -56,21 +56,25 @@ public class App {
                 case 3:
                     view.mostrarMensaje("Registrar solicitud de compra");
                     view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
-                    int codigoSC = leer.nextInt();
+                    String codigoSC = leer.next();
 
-                    view.mostrarMensaje("Ingrese el estado de la solicitud:");
+                    view.mostrarMensaje("Ingrese el estado de la solicitud: \n" +
+                            "     SOLICITADA,\n" +
+                            "    EN_REVISION,\n" +
+                            "    APROBADA,\n" +
+                            "    RECHAZADA");
                     EstadoSolicitud[] estados = EstadoSolicitud.values();
                     for (int i = 0; i < estados.length; i++) {
                         System.out.println((i + 1) + ". " + estados[i]);
                     }
 
                     int respuesta = leer.nextInt();
-                    leer.nextLine();  // Limpiar el buffer de entrada
+                    leer.nextLine();
 
                     while (respuesta < 1 || opcion > estados.length) {
                         view.mostrarMensaje("Opción inválida. Intente nuevamente:");
                         respuesta = leer.nextInt();
-                        leer.nextLine();  // Limpiar el buffer de entrada
+                        leer.nextLine();
                     }
 
                     EstadoSolicitud estadoSolicitud = estados[respuesta - 1];
@@ -99,18 +103,21 @@ public class App {
                     view.mostrarMensaje("Listar Proveedores");
                     for (int i = 0; i < proveedores.size(); i++){
                         view.mostrarMensaje(proveedores.get(i).toString());
+                        view.mostrarMensaje("---------------------------------------");
                     }
                     break;
                 case 5:
                     view.mostrarMensaje("Listar Productos");
                     for (int i = 0; i < productos.size(); i++){
                         view.mostrarMensaje(productos.get(i).toString());
+                        view.mostrarMensaje("---------------------------------------");
                     }
                     break;
                 case 6:
                     view.mostrarMensaje("Listar solicitudes de compras: ");
                     for (int i = 0; i < solicitudes.size(); i++){
                         view.mostrarMensaje(solicitudes.get(i).toString());
+                        view.mostrarMensaje("---------------------------------------");
                     }
                     break;
                 case 7:
@@ -139,14 +146,69 @@ public class App {
                     break;
 
                 case 9:
-                    view.mostrarMensaje("Buscar solicitud por número");
+                    view.mostrarMensaje("Buscar solicitud por ID");
+                    view.mostrarMensaje("Ingrese el codigo identificador de la solicitud: ");
+                    String idA = leer.next();
+                    SolicitudDeCompra solicitudEncontradaA = buscarSolicitudPorID(solicitudes, idA);
+                    if (solicitudEncontradaA != null) {
+                        view.mostrarMensaje("Solicitud encontrada:");
+                        view.mostrarMensaje(solicitudEncontradaA.toString());
+                    } else {
+                        view.mostrarMensaje("Solicitud no encontrada.");
+                    }
                     break;
+
                 case 10:
                     view.mostrarMensaje("Aprobar / Rechazar solicitud de compra");
+                    view.mostrarMensaje("Ingrese el código identificador de la solicitud: ");
+                    String id = leer.next();
+                    SolicitudDeCompra solicitudEncontrada = buscarSolicitudPorID(solicitudes, id);
+                    if (solicitudEncontrada != null) {
+                        view.mostrarMensaje("Solicitud encontrada:");
+                        view.mostrarMensaje("Ingrese el nuevo estado de la solicitud: \n" +
+                                "   (SOLICITADA,\n" +
+                                "    EN_REVISION,\n" +
+                                "    APROBADA,\n" +
+                                "    RECHAZADA)");
+                        EstadoSolicitud[] estado = EstadoSolicitud.values();
+                        for (int i = 0; i < estado.length; i++) {
+                            System.out.println((i + 1) + ". " + estado[i]);
+                        }
+
+                        int respuestaNV = leer.nextInt();
+                        leer.nextLine();
+
+                        while (respuestaNV < 1 || respuestaNV > estado.length) {
+                            view.mostrarMensaje("Opción inválida. Intente nuevamente:");
+                            respuestaNV = leer.nextInt();
+                            leer.nextLine();
+                        }
+
+                        solicitudEncontrada.setEstadoSolicitud(estado[respuestaNV - 1]);
+
+                        view.mostrarMensaje("Estado actualizado correctamente.");
+                        view.mostrarMensaje(solicitudEncontrada.toString());
+
+                    } else {
+                        view.mostrarMensaje("Solicitud no encontrada.");
+                    }
                     break;
+
                 case 11:
                     view.mostrarMensaje("Calcular total de una solicitud");
+                    view.mostrarMensaje("Ingrese el código identificador de la solicitud: ");
+                    String idCalcular = leer.next();
+                    SolicitudDeCompra solicitudEncontradaCalcular = buscarSolicitudPorID(solicitudes, idCalcular);
+                    if (solicitudEncontradaCalcular != null) {
+                        float total = solicitudEncontradaCalcular.calcularTotalSolicitud();
+                        view.mostrarMensaje(solicitudEncontradaCalcular.toString());
+                        view.mostrarMensaje("El total de la solicitud es: $" + total);
+                    } else {
+                        view.mostrarMensaje("Solicitud no encontrada.");
+                    }
                     break;
+
+
                 case 12:
                     Empleado empleado = view.registrarEmpleado();
                     empleados.add(empleado); // Guardar empleado
@@ -189,6 +251,16 @@ public class App {
         for (Empleado e : lista) {
             if (e.getCedula().equalsIgnoreCase(cedula)) {
                 return e;
+            }
+        }
+
+        return null;
+    }
+
+    public static SolicitudDeCompra buscarSolicitudPorID(ArrayList<SolicitudDeCompra> lista, String id) {
+        for (SolicitudDeCompra s : lista) {
+            if (s.getIdSolicitud().equalsIgnoreCase(id)) {
+                return s;
             }
         }
 

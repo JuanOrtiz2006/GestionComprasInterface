@@ -177,21 +177,41 @@ public class ViewConsole {
         ArrayList<DetalleCompra> detallesCompra = new ArrayList<>();
         mostrarMensaje("\nDetalles de compra");
 
-        int tamaño = productos.size();
-        for (int i = 0; i < tamaño; i++) {
-            mostrarMensaje("\nProducto: " + productos.get(i).getNombre());
-            mostrarMensaje("Cantidad:");
-            int cantidad = leer.nextInt();
-            leer.nextLine();  // Limpiar el buffer de entrada
-            mostrarMensaje("Descripción: ");
-            String descripcion = leer.nextLine();  // Usamos nextLine() para descripciones
+        String continuar = "Si";
+        while (continuar.equalsIgnoreCase("Si")) {
+            mostrarMensaje("Ingrese el código del producto a agregar:");
+            String codigoAComparar = leer.next();
 
-            DetalleCompra detalleCompra = new DetalleCompra(cantidad, productos.get(i), descripcion);
-            detallesCompra.add(detalleCompra);
+            Producto productoEncontrado = null;
+            for (Producto p : productos) {
+                if (p.getCodigo().equalsIgnoreCase(codigoAComparar)) {
+                    productoEncontrado = p;
+                    break;
+                }
+            }
+            if (productoEncontrado != null) {
+                mostrarMensaje("\nProducto encontrado: " + productoEncontrado.getNombre());
+                mostrarMensaje("Cantidad:");
+                int cantidad = leer.nextInt();
+                leer.nextLine(); // Limpiar buffer
+                mostrarMensaje("Descripción: ");
+                String descripcion = leer.nextLine(); // nextLine para leer toda la línea
+
+                DetalleCompra detalleCompra = new DetalleCompra(cantidad, productoEncontrado, descripcion);
+                detallesCompra.add(detalleCompra);
+
+                mostrarMensaje("Producto agregado al detalle de compra.");
+            } else {
+                mostrarMensaje("Producto no encontrado. Intente de nuevo.");
+            }
+
+            mostrarMensaje("¿Desea agregar otro producto? (Si/No)");
+            continuar = leer.next();
         }
 
         return detallesCompra;
     }
+
 
     public Empleado registrarEmpleado(){
         mostrarMensaje("Ingresar un empleado con su respectivo departamento: ");

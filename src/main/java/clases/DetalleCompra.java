@@ -50,6 +50,6 @@ public class DetalleCompra implements Calculable {
                 +  cantidad + " | "
                 + descripcion + " | PrecioU: "
                 + producto.calcularCosto() + " | PrecioT: "
-                + calcularCostoTotal() + " |";
+                + calcularCostoTotal() + " | \n";
     }
 }

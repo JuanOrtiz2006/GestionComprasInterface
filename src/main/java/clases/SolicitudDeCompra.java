@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class SolicitudDeCompra {
-    private int id;
+    private String id;
     private EstadoSolicitud estadoSolicitud;
     private GregorianCalendar fechaSolicitud;
     private Empleado solicitante;
@@ -17,7 +17,7 @@ public class SolicitudDeCompra {
         this.detalleCompras = new ArrayList<>();
     }
 
-    public SolicitudDeCompra(int id, EstadoSolicitud estadoSolicitud, GregorianCalendar fechaSolicitud, Empleado solicitante, List<DetalleCompra> detalleCompras) {
+    public SolicitudDeCompra(String id, EstadoSolicitud estadoSolicitud, GregorianCalendar fechaSolicitud, Empleado solicitante, List<DetalleCompra> detalleCompras) {
         this.id = id;
         this.estadoSolicitud = estadoSolicitud;
         this.fechaSolicitud = fechaSolicitud;
@@ -25,11 +25,11 @@ public class SolicitudDeCompra {
         this.detalleCompras = detalleCompras;
     }
 
-    public int getIdSolicitud() {
+    public String getIdSolicitud() {
         return id;
     }
 
-    public void setIdSolicitud(int id) {
+    public void setIdSolicitud(String id) {
         this.id = id;
     }
 
@@ -65,6 +65,15 @@ public class SolicitudDeCompra {
         return detalleCompras;
     }
 
+
+
+    public float calcularTotalSolicitud() {
+        float total = 0;
+        for (DetalleCompra detalle : detalleCompras) {
+            total += detalle.getProducto().calcularCosto() * detalle.getCantidad();
+        }
+        return total;
+    }
 
     @Override
 
