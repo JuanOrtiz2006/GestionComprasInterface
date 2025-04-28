@@ -1,5 +1,5 @@
 package clases;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -46,7 +46,7 @@ public class ViewConsole {
         mostrarMensaje("Ingrese la cédula del proveedor:");
         String cedula = leer.next();
 
-        // Limpiar el buffer de entrada
+
         leer.nextLine();
 
         String[] respuestas = {empresa, nombre, correo, cedula};
@@ -75,7 +75,7 @@ public class ViewConsole {
         mostrarMensaje("Ingrese el precio unitario del Artículo:");
         float precioU = leer.nextFloat();
         leer.nextLine();  // Limpiar el buffer de entrada
-        mostrarMensaje("Ingrese el IVA del Producto:");
+        mostrarMensaje("Ingrese el IVA del Producto: (Ejemplo: 0,15)");
         float IVA = leer.nextFloat();
         leer.nextLine();  // Limpiar el buffer de entrada
 
@@ -159,18 +159,21 @@ public class ViewConsole {
     }
 
     public GregorianCalendar fechaSolicitud() {
+
         mostrarMensaje("\nFecha de Solicitud----- ");
         mostrarMensaje("Ingrese el día de la fecha de la solicitud: ");
         int dia = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
+        leer.nextLine();
         mostrarMensaje("Ingrese el mes de la fecha de la solicitud: (1-12) ");
         int mes = leer.nextInt() - 1;  // Meses en GregorianCalendar son 0-indexed
-        leer.nextLine();  // Limpiar el buffer de entrada
+        leer.nextLine();
         mostrarMensaje("Ingrese el año de la fecha de la solicitud: ");
         int anio = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
+        leer.nextLine();
+
 
         return new GregorianCalendar(anio, mes, dia);
+
     }
 
     public ArrayList<DetalleCompra> detalleCompra(ArrayList<Producto> productos) {

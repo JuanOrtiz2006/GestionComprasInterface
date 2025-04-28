@@ -1,5 +1,5 @@
 package clases;
-
+import java.text.SimpleDateFormat;
 import enums.EstadoSolicitud;
 
 import java.util.ArrayList;
@@ -65,6 +65,10 @@ public class SolicitudDeCompra {
         return detalleCompras;
     }
 
+    private String getFechaFormateada() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(fechaSolicitud.getTime());
+    }
 
 
     public float calcularTotalSolicitud() {
@@ -80,7 +84,7 @@ public class SolicitudDeCompra {
     public String toString(){
 
         return "Codigo:" + id +
-                "\nFecha: " + fechaSolicitud +
+                "\nFecha: " + getFechaFormateada() +
                 "\n Solicitante:" + solicitante +
                 "\n" + detalleCompras +
                 "\n Estado: " +estadoSolicitud;
