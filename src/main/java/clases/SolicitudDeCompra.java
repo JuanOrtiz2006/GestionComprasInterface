@@ -79,7 +79,7 @@ public class SolicitudDeCompra {
 
     public String toString(){
 
-        return "Codigo: " + id +
+        return "Codigo:" + id +
                 "\nFecha: " + fechaSolicitud +
                 "\n Solicitante:" + solicitante +
                 "\n" + detalleCompras +
