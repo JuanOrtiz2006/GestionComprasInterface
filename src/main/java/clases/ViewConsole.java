@@ -54,7 +54,7 @@ public class ViewConsole {
         return respuestas;
     }
 
-    public int tipoProducto() {
+    public Producto tipoProducto() {
         mostrarMensaje("\nRegistrar producto");
         mostrarMensaje("¿Qué tipo de producto desea registrar?: \n1. Artículos\n2. Paquete\n3. Servicios");
         int respuesta = leer.nextInt();
@@ -64,20 +64,13 @@ public class ViewConsole {
             mostrarMensaje("Opción fuera de rango. Intente nuevamente.");
             return tipoProducto();  // Recursión para repetir la selección si es incorrecta
         }
-        return respuesta;
-    }
 
-    public Articulo registrarArticulo() {
-        mostrarMensaje("\nIngrese el código del Artículo: ");
+        mostrarMensaje("\nIngrese el código del producto: ");
         String codigo = leer.nextLine();  // Captura la línea completa
-        mostrarMensaje("Ingrese el nombre del Artículo: ");
+        mostrarMensaje("Ingrese el nombre del producto: ");
         String nombre = leer.nextLine();
-        mostrarMensaje("Ingrese el precio unitario del Artículo:");
+        mostrarMensaje("Ingrese el precio unitario del producto:");
         float precioU = leer.nextFloat();
-        leer.nextLine();  // Limpiar el buffer de entrada
-        mostrarMensaje("Ingrese el IVA del Producto: (Ejemplo: 0,15)");
-        float IVA = leer.nextFloat();
-        leer.nextLine();  // Limpiar el buffer de entrada
 
         mostrarMensaje("Seleccione el tipo de producto:");
         TipoProducto[] tipos = TipoProducto.values();
@@ -94,69 +87,41 @@ public class ViewConsole {
         }
 
         TipoProducto tipoSeleccionado = tipos[opcion - 1];
-        return new Articulo(codigo, nombre, precioU, tipoSeleccionado, IVA);
+
+        switch (respuesta) {
+            case 1:
+                return registrarArticulo(codigo, nombre, precioU, tipoSeleccionado);
+            case 2:
+                return registrarPaquete(codigo, nombre, precioU, tipoSeleccionado);
+            case 3:
+                return registrarServicio(codigo, nombre, precioU, tipoSeleccionado);
+            default:
+                mostrarMensaje("Opción inválida.");
+                return null;
+        }
+
     }
 
-    public Paquete registrarPaquete() {
-        mostrarMensaje("\nRegistrando Paquete");
-        mostrarMensaje("Ingrese el código: ");
-        String codigo = leer.nextLine();
-        mostrarMensaje("Ingrese el nombre: ");
-        String nombre = leer.nextLine();
-        mostrarMensaje("Ingrese el precio unitario:");
-        float precioU = leer.nextFloat();
-        leer.nextLine();  // Limpiar el buffer de entrada
-        mostrarMensaje("Ingrese el peso:");
+    public Articulo registrarArticulo(String codigo, String nombre, float precio, TipoProducto tipoProducto) {
+        mostrarMensaje("Ingrese el IVA del artículo:");
+        float IVA = leer.nextFloat();
+        return new Articulo(codigo, nombre, precio, tipoProducto, IVA);
+    }
+
+    public Paquete registrarPaquete(String codigo, String nombre, float precio, TipoProducto tipoProducto) {
+        mostrarMensaje("Ingrese el peso del paquete:");
         float peso = leer.nextFloat();
-        leer.nextLine();  // Limpiar el buffer de entrada
-
-        mostrarMensaje("Seleccione el tipo:");
-        TipoProducto[] tipos = TipoProducto.values();
-        for (int i = 0; i < tipos.length; i++) {
-            System.out.println((i + 1) + ". " + tipos[i]);
-        }
-        int opcion = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
-
-        while (opcion < 1 || opcion > tipos.length) {
-            mostrarMensaje("Opción inválida. Intente nuevamente:");
-            opcion = leer.nextInt();
-            leer.nextLine();  // Limpiar el buffer de entrada
-        }
-
-        TipoProducto tipoSeleccionado = tipos[opcion - 1];
-        return new Paquete(codigo, nombre, precioU, tipoSeleccionado, peso);
+        leer.nextLine();
+        return new Paquete(codigo, nombre, precio, tipoProducto, peso);
     }
 
-    public Servicio registrarServicio() {
-        mostrarMensaje("\nIngrese el código del Servicio proporcionado: ");
-        String codigo = leer.nextLine();
-        mostrarMensaje("Ingrese el nombre del Servicio Proporcionado: ");
-        String nombre = leer.nextLine();
-        mostrarMensaje("Ingrese el precio de la hora por el servicio:");
-        float precio = leer.nextFloat();
-        leer.nextLine();  // Limpiar el buffer de entrada
-        mostrarMensaje("Ingrese cuánto tiempo se otorgó el servicio (en horas):");
+    public Servicio registrarServicio(String codigo, String nombre, float precio, TipoProducto tipoProducto) {
+        mostrarMensaje("Ingrese el tiempo estimado de servicio (en horas):");
         int tiempoHoras = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
-
-        mostrarMensaje("Seleccione el tipo:");
-        TipoProducto[] tipos = TipoProducto.values();
-        for (int i = 0; i < tipos.length; i++) {
-            System.out.println((i + 1) + ". " + tipos[i]);
-        }
-        int opcion = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
-
-        while (opcion < 1 || opcion > tipos.length) {
-            mostrarMensaje("Opción inválida. Intente nuevamente:");
-            opcion = leer.nextInt();
-            leer.nextLine();  // Limpiar el buffer de entrada
-        }
-
-        TipoProducto tipoSeleccionado = tipos[opcion - 1];
-        return new Servicio(codigo, nombre, precio, tipoSeleccionado, tiempoHoras);
+        leer.nextLine();
+        return new Servicio(codigo, nombre, precio, tipoProducto, tiempoHoras);
     }
+
 
     public GregorianCalendar fechaSolicitud() {
 
@@ -216,7 +181,7 @@ public class ViewConsole {
     }
 
 
-    public Empleado registrarEmpleado(){
+    public Empleado registrarEmpleado() {
         mostrarMensaje("Ingresar un empleado con su respectivo departamento: ");
         mostrarMensaje("Ingrese el nombre del Empleado: ");
         String nombreE = leer.nextLine();
@@ -230,12 +195,12 @@ public class ViewConsole {
             System.out.println((i + 1) + ". " + departamentos[i]);
         }
         int opcion = leer.nextInt();
-        leer.nextLine();  // Limpiar el buffer de entrada
+        leer.nextLine();  // Limpiar el buffer de entrada - Esta línea es correcta
 
         while (opcion < 1 || opcion > departamentos.length) {
             mostrarMensaje("Opción inválida. Intente nuevamente:");
             opcion = leer.nextInt();
-            leer.nextLine();  // Limpiar el buffer de entrada
+            leer.nextLine();  // Limpiar el buffer de entrada - Esta línea es correcta
         }
 
         TipoDepartamento tipoSeleccionado = departamentos[opcion - 1];

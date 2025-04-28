@@ -1,8 +1,5 @@
 import clases.*;
 import enums.EstadoSolicitud;
-import enums.TipoDepartamento;
-import enums.TipoProducto;
-import enums.EstadoSolicitud;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.GregorianCalendar;
@@ -33,36 +30,16 @@ public class App {
 
                     break;
                 case 2:
-                    int tipoProducto = view.tipoProducto();
-                    if (tipoProducto == 1){
-                        Articulo articulo = view.registrarArticulo();
-                        productos.add(articulo); // Agrega el articulo a la lista de prodcutos
-                        view.mostrarMensaje("Articulo registrado correctamente.");
-
+                    Producto producto = view.tipoProducto(); // Asigna directamente el Producto devuelto
+                    if (producto != null) {
+                        productos.add(producto);
+                        view.mostrarMensaje("Producto registrado correctamente.");
                     }
-
-                    if (tipoProducto == 2){
-                        Paquete paquete = view.registrarPaquete();
-                        productos.add(paquete); // Guardar proveedor
-                        view.mostrarMensaje("Paquete registrado correctamente.");
-
-                    }
-                    if (tipoProducto == 3 ){
-                        Servicio servicio = view.registrarServicio();
-                        productos.add(servicio); // Guardar proveedor
-                        view.mostrarMensaje("Servicio registrado correctamente.");}
-
                     break;
                 case 3:
                     view.mostrarMensaje("Registrar solicitud de compra");
                     view.mostrarMensaje("Ingrese el coidgo identificador de la solicitud a ingresar: ");
                     String codigoSC = leer.next();
-
-                    view.mostrarMensaje("Ingrese el estado de la solicitud: \n" +
-                            "     SOLICITADA,\n" +
-                            "    EN_REVISION,\n" +
-                            "    APROBADA,\n" +
-                            "    RECHAZADA");
                     EstadoSolicitud[] estados = EstadoSolicitud.values();
                     for (int i = 0; i < estados.length; i++) {
                         System.out.println((i + 1) + ". " + estados[i]);
