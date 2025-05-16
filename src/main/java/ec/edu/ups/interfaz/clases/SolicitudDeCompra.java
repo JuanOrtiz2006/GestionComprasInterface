@@ -1,6 +1,6 @@
-package clases;
+package ec.edu.ups.interfaz.clases;
 import java.text.SimpleDateFormat;
-import enums.EstadoSolicitud;
+import ec.edu.ups.interfaz.enums.EstadoSolicitud;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

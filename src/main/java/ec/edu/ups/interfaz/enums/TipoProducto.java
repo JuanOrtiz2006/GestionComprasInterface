@@ -1,4 +1,4 @@
-package enums;
+package ec.edu.ups.interfaz.enums;
 
 public enum TipoProducto {
     LIMPIEZA,

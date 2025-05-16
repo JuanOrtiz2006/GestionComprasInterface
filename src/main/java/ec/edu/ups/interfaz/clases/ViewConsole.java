@@ -1,10 +1,10 @@
-package clases;
-import java.text.SimpleDateFormat;
+package ec.edu.ups.interfaz.clases;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import enums.TipoProducto;
-import enums.TipoDepartamento;
+
+import ec.edu.ups.interfaz.enums.TipoProducto;
+import ec.edu.ups.interfaz.enums.TipoDepartamento;
 
 public class ViewConsole {
     private Scanner leer;

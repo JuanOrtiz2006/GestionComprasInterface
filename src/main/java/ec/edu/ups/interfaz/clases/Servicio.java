@@ -1,6 +1,6 @@
-package clases;
+package ec.edu.ups.interfaz.clases;
 
-import enums.TipoProducto;
+import ec.edu.ups.interfaz.enums.TipoProducto;
 
 public class Servicio extends Producto {
     private int tiempoHoras;

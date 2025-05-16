@@ -1,4 +1,4 @@
-package clases;
+package ec.edu.ups.interfaz.clases;
 public class DetalleCompra implements Calculable {
     private int cantidad;
     private Producto producto;

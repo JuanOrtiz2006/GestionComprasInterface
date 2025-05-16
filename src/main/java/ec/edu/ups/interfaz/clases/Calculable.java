@@ -1,4 +1,4 @@
-package clases;
+package ec.edu.ups.interfaz.clases;
 
 public interface Calculable {
 

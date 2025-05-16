@@ -1,5 +1,5 @@
-package clases;
-import enums.TipoProducto;
+package ec.edu.ups.interfaz.clases;
+import ec.edu.ups.interfaz.enums.TipoProducto;
 public abstract class Producto {
     private String codigo;
     private String nombre;
