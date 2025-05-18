@@ -252,4 +252,8 @@ public class VentanaRegistroProducto extends Frame{
         // Limpiar campo de búsqueda
         textBCodigo.setText("");
     }
+
+    public List<Producto> getListaProductos(){
+        return listaProductos;
+    }
 }

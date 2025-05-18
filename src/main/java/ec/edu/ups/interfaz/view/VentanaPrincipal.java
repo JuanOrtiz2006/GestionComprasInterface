@@ -1,6 +1,7 @@
 package ec.edu.ups.interfaz.view;
 
 import ec.edu.ups.interfaz.clases.Empleado;
+import ec.edu.ups.interfaz.clases.Producto;
 import ec.edu.ups.interfaz.clases.Proveedor;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class VentanaPrincipal extends Frame {
 
     private java.util.List<Empleado> listaEmpleados = new ArrayList<>();
     private java.util.List<Proveedor> listaProvedores = new ArrayList<>();
+    private java.util.List<Producto> listaProductos = new ArrayList<>();
 
     private Panel panelGeneral;
     private Panel panelNorte;
@@ -190,13 +192,33 @@ public class VentanaPrincipal extends Frame {
                 informacion.append("No hay proveedores registrados.\n");
             } else {
                 for (Proveedor prov : listaProvedores) {
-                    informacion.append("\n\n").append(prov.getNombre())
+                    informacion.append("\n").append(prov.getNombre())
                             .append(" Ced: ").append(prov.getCedula())
                             .append(" Emp: ").append(prov.getEmpresa())
                             .append(" @: ").append(prov.getEmail()).append("\n");
                 }
             }
         }
+
+        informacion.append("\nLista de Productos:\n");
+
+        // Verificamos si la ventana de productos existe
+        if (ventanaRegistroProducto == null) {
+            informacion.append("No hay productos registrados.\n");
+        } else {
+            listaProductos = ventanaRegistroProducto.getListaProductos();
+            if (listaProductos.isEmpty()) {
+                informacion.append("No hay productos registrados.\n");
+            } else {
+                for (Producto prod : listaProductos) {
+                    informacion.append("\n").append(prod.getNombre())
+                            .append(" Cod: ").append(prod.getCodigo())
+                            .append(" $: ").append(prod.getPrecioU())
+                            .append(" Tipo: ").append(prod.getTipoProducto()).append("\n");
+                }
+            }
+        }
+
 
         // Mostrar la información en un JOptionPane
         JOptionPane.showMessageDialog(this, informacion.toString(), "Información General", JOptionPane.INFORMATION_MESSAGE);
