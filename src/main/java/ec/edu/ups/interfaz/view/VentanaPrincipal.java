@@ -1,11 +1,21 @@
 package ec.edu.ups.interfaz.view;
 
+import ec.edu.ups.interfaz.clases.Empleado;
+import ec.edu.ups.interfaz.clases.Proveedor;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 public class VentanaPrincipal extends Frame {
+    private VentanaRegistroEmpleado ventanaRegistroEmpleado;
+    private VentanaRegistroProvedor ventanaRegistroProvedor;
+
+    private java.util.List<Empleado> listaEmpleados = new ArrayList<>();
+    private java.util.List<Proveedor> listaProvedores = new ArrayList<>();
 
     private Panel panelGeneral;
     private Panel panelNorte;
@@ -21,9 +31,9 @@ public class VentanaPrincipal extends Frame {
     private Button botonOpcionesProvedor;
     private Button botonOpcionesProducto;
     private Button botonOpcionesSolicitud;
-    private Button botonRegistrar;
+    private Button botonImprimirInformacion;
 
-    private Label labelRegistrar;
+    private Label labelInformacion;
 
     public VentanaPrincipal() {
         panelGeneral = new Panel(new BorderLayout(3, 1));
@@ -64,10 +74,10 @@ public class VentanaPrincipal extends Frame {
 
         // Panel de impresión
         panelSur = new Panel(new GridLayout(2, 1));
-        labelRegistrar = new Label("Imprimir listado de informacion");
-        botonRegistrar = new Button("Imprimir");
-        panelSur.add(labelRegistrar);
-        panelSur.add(botonRegistrar);
+        labelInformacion = new Label("Imprimir listado de informacion");
+        botonImprimirInformacion = new Button("Imprimir");
+        panelSur.add(labelInformacion);
+        panelSur.add(botonImprimirInformacion);
 
         panelGeneral.add(panelNorte, BorderLayout.NORTH);
         panelGeneral.add(panelCentral, BorderLayout.CENTER);
@@ -80,16 +90,35 @@ public class VentanaPrincipal extends Frame {
         botonOpcionesEmpleado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VentanaRegistroEmpleado();
+                if (ventanaRegistroEmpleado == null) {
+                    ventanaRegistroEmpleado = new VentanaRegistroEmpleado();
+                } else {
+                    ventanaRegistroEmpleado.setVisible(true);
+                }
             }
         });
 
+// Evento para el botón de proveedores
         botonOpcionesProvedor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VentanaRegistroProvedor();
+                if (ventanaRegistroProvedor == null) {
+                    ventanaRegistroProvedor = new VentanaRegistroProvedor();
+                } else {
+                    ventanaRegistroProvedor.setVisible(true);
+                }
             }
         });
+
+
+        botonImprimirInformacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                imprimirInformacion();
+            }
+        });
+
+
     }
 
     private static Panel crearPanelConImagen(String titulo, String rutaImagen) {
@@ -120,6 +149,52 @@ public class VentanaPrincipal extends Frame {
 
         return panel;
     }
+
+    private void imprimirInformacion() {
+        StringBuilder informacion = new StringBuilder();
+        informacion.append("Lista de Empleados:\n");
+
+        // Verificamos si la ventana de empleados existe
+        if (ventanaRegistroEmpleado == null) {
+            informacion.append("No hay empleados registrados.\n");
+        } else {
+            listaEmpleados = ventanaRegistroEmpleado.getListaEmpleados();
+            if (listaEmpleados.isEmpty()) {
+                informacion.append("No hay empleados registrados.\n");
+            } else {
+                for (Empleado emp : listaEmpleados) {
+                    informacion.append(emp.getNombre())
+                            .append(" Ced: ").append(emp.getCedula())
+                            .append(" Dep: ").append(emp.getDepartamento().getNombreDepartamento())
+                            .append(" @: ").append(emp.getEmail()).append("\n");
+                }
+            }
+        }
+
+        informacion.append("\nLista de Proveedores:\n");
+
+        // Verificamos si la ventana de proveedores existe
+        if (ventanaRegistroProvedor == null) {
+            informacion.append("No hay proveedores registrados.\n");
+        } else {
+            listaProvedores = ventanaRegistroProvedor.getListaProvedores();
+            if (listaProvedores.isEmpty()) {
+                informacion.append("No hay proveedores registrados.\n");
+            } else {
+                for (Proveedor prov : listaProvedores) {
+                    informacion.append("\n\n").append(prov.getNombre())
+                            .append(" Ced: ").append(prov.getCedula())
+                            .append(" Emp: ").append(prov.getEmpresa())
+                            .append(" @: ").append(prov.getEmail()).append("\n");
+                }
+            }
+        }
+
+        // Mostrar la información en un JOptionPane
+        JOptionPane.showMessageDialog(this, informacion.toString(), "Información General", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
 
     public static void main(String[] args) {
         new VentanaPrincipal();

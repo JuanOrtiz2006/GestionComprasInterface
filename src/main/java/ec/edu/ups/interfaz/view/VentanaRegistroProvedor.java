@@ -169,4 +169,8 @@ public class VentanaRegistroProvedor extends Frame{
             // Limpiar campo de búsqueda
             textBuscarEmpleado.setText("");
         }
+
+    public List<Proveedor> getListaProvedores() {
+        return listaProvedores;
+    }
 }

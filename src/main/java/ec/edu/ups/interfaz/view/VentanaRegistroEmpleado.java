@@ -187,4 +187,8 @@ public class VentanaRegistroEmpleado extends Frame{
         // Limpiar campo de búsqueda
         textBuscarEmpleado.setText("");
     }
+
+    public List<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
 }
