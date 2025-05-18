@@ -125,7 +125,7 @@ public class VentanaRegistroProvedor extends Frame{
             // Guardar en la lista
             listaProvedores.add(provedor);
 
-            JOptionPane.showMessageDialog(this, "Empleado registrado correctamente:\n" +
+            JOptionPane.showMessageDialog(this, "Provedor registrado correctamente:\n" +
                             "Nombre: " + provedor.getNombre() + "\n" +
                             "Correo: " + provedor.getEmail() + "\n" +
                             "Cédula: " + provedor.getCedula() + "\n" +
@@ -156,14 +156,14 @@ public class VentanaRegistroProvedor extends Frame{
             }
 
             if (encontrado != null) {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado:\n" +
+                JOptionPane.showMessageDialog(this, "Provedor encontrado:\n" +
                                 "Nombre: " + encontrado.getNombre() + "\n" +
                                 "Correo: " + encontrado.getEmail() + "\n" +
                                 "Cédula: " + encontrado.getCedula() + "\n" +
                                 "Empresa: " + encontrado.getEmpresa(),
                         "Empleado Encontrado", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Provedor no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
             // Limpiar campo de búsqueda

@@ -123,9 +123,9 @@ public class VentanaRegistroEmpleado extends Frame{
     }
 
     private void registrarEmpleado() {
-        String nombre = textRegistroNombre.getText().trim();
-        String correo = textRegistroCorreo.getText().trim();
-        String cedula = textRegistroCedula.getText().trim();
+        String nombre = textRegistroNombre.getText();
+        String correo = textRegistroCorreo.getText();
+        String cedula = textRegistroCedula.getText();
 
         if (nombre.isEmpty() || correo.isEmpty() || cedula.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);

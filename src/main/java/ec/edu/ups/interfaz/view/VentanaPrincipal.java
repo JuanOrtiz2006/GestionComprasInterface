@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class VentanaPrincipal extends Frame {
     private VentanaRegistroEmpleado ventanaRegistroEmpleado;
     private VentanaRegistroProvedor ventanaRegistroProvedor;
+    private VentanaRegistroProducto ventanaRegistroProducto;
 
     private java.util.List<Empleado> listaEmpleados = new ArrayList<>();
     private java.util.List<Proveedor> listaProvedores = new ArrayList<>();
@@ -38,33 +39,31 @@ public class VentanaPrincipal extends Frame {
     public VentanaPrincipal() {
         panelGeneral = new Panel(new BorderLayout(3, 1));
 
+        //Panel Superior
         panelNorte = new Panel();
         titulo = new Label("Bienvenido");
         panelNorte.add(titulo);
 
+        //Panel Central
         panelCentral = new Panel();
-
         // Panel de Empleados
         panelEmpleados = new Panel(new BorderLayout(2, 1));
         panelEmpleados.add(crearPanelConImagen("Empleados", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenEmpleados.png"), BorderLayout.NORTH);
         botonOpcionesEmpleado = new Button("Opciones");
         panelEmpleados.add(botonOpcionesEmpleado);
         panelCentral.add(panelEmpleados);
-
         // Panel de Proveedores
         panelProvedores = new Panel(new BorderLayout(2, 1));
         panelProvedores.add(crearPanelConImagen("Proveedores", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenProvedores.png"), BorderLayout.NORTH);
         botonOpcionesProvedor = new Button("Opciones");
         panelProvedores.add(botonOpcionesProvedor);
         panelCentral.add(panelProvedores);
-
         // Panel de Productos
         panelProductos = new Panel(new BorderLayout(2, 1));
         panelProductos.add(crearPanelConImagen("Productos", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenProducto.png"), BorderLayout.NORTH);
         botonOpcionesProducto = new Button("Opciones");
         panelProductos.add(botonOpcionesProducto);
         panelCentral.add(panelProductos);
-
         // Panel de Solicitudes
         panelSolicitudes = new Panel(new BorderLayout(2, 1));
         panelSolicitudes.add(crearPanelConImagen("Solicitudes", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenSolicitud.png"), BorderLayout.NORTH);
@@ -72,20 +71,20 @@ public class VentanaPrincipal extends Frame {
         panelSolicitudes.add(botonOpcionesSolicitud);
         panelCentral.add(panelSolicitudes);
 
-        // Panel de impresión
+        // Panel Inferior
         panelSur = new Panel(new GridLayout(2, 1));
         labelInformacion = new Label("Imprimir listado de informacion");
         botonImprimirInformacion = new Button("Imprimir");
         panelSur.add(labelInformacion);
         panelSur.add(botonImprimirInformacion);
 
+        //Agregacion de Paneles al Panel General y al Frame
         panelGeneral.add(panelNorte, BorderLayout.NORTH);
         panelGeneral.add(panelCentral, BorderLayout.CENTER);
         panelGeneral.add(panelSur, BorderLayout.SOUTH);
         add(panelGeneral);
         setSize(500, 500);
         setVisible(true);
-
         // Evento para el botón de empleados
         botonOpcionesEmpleado.addActionListener(new ActionListener() {
             @Override
@@ -97,8 +96,7 @@ public class VentanaPrincipal extends Frame {
                 }
             }
         });
-
-// Evento para el botón de proveedores
+        // Evento para el botón de proveedores
         botonOpcionesProvedor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,8 +107,18 @@ public class VentanaPrincipal extends Frame {
                 }
             }
         });
-
-
+        //Evento para el boton de productos
+        botonOpcionesProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ventanaRegistroProducto == null) {
+                    ventanaRegistroProducto = new VentanaRegistroProducto();
+                } else {
+                    ventanaRegistroProducto.setVisible(true);
+                }
+            }
+        });
+        //Evento para el boton de Imprimir Informacion
         botonImprimirInformacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
