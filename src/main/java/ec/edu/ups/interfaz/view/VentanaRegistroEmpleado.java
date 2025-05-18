@@ -7,6 +7,8 @@ import ec.edu.ups.interfaz.enums.TipoDepartamento;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -37,6 +39,9 @@ public class VentanaRegistroEmpleado extends Frame{
 
     private Choice choiceDepartamento;
     private Button botonRegistrar;
+
+    private TipoDepartamento departamentoSeleccionado;
+
 
     public VentanaRegistroEmpleado(){
         setTitle("Registro de Empleado");
@@ -104,13 +109,23 @@ public class VentanaRegistroEmpleado extends Frame{
                 buscarEmpleado();
             }
         });
+
+        choiceDepartamento.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String seleccion = choiceDepartamento.getSelectedItem();
+                    departamentoSeleccionado = TipoDepartamento.valueOf(seleccion);
+                }
+            }
+        });
+
     }
 
     private void registrarEmpleado() {
         String nombre = textRegistroNombre.getText().trim();
         String correo = textRegistroCorreo.getText().trim();
         String cedula = textRegistroCedula.getText().trim();
-        String departamentoSeleccionado = choiceDepartamento.getSelectedItem();
 
         if (nombre.isEmpty() || correo.isEmpty() || cedula.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -122,8 +137,7 @@ public class VentanaRegistroEmpleado extends Frame{
         empleado.setNombre(nombre);
         empleado.setEmail(correo);
         empleado.setCedula(cedula);
-        TipoDepartamento tipoDepartamento = TipoDepartamento.valueOf(departamentoSeleccionado);
-        Departamento departamento = new Departamento(tipoDepartamento.ordinal() + 1, tipoDepartamento.name());
+        Departamento departamento = new Departamento(departamentoSeleccionado.ordinal() + 1, departamentoSeleccionado.name());
         empleado.setDepartamento(departamento);
 
         // Guardar en la lista
@@ -133,7 +147,7 @@ public class VentanaRegistroEmpleado extends Frame{
                         "Nombre: " + empleado.getNombre() + "\n" +
                         "Correo: " + empleado.getEmail() + "\n" +
                         "Cédula: " + empleado.getCedula() + "\n" +
-                        "Departamento: " + empleado.getDepartamento(),
+                        "Departamento: " + empleado.getDepartamento().getNombreDepartamento(),
                 "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
 
         // Limpiar campos
@@ -164,7 +178,7 @@ public class VentanaRegistroEmpleado extends Frame{
                             "Nombre: " + encontrado.getNombre() + "\n" +
                             "Correo: " + encontrado.getEmail() + "\n" +
                             "Cédula: " + encontrado.getCedula() + "\n" +
-                            "Departamento: " + encontrado.getDepartamento(),
+                            "Departamento: " + encontrado.getDepartamento().getNombreDepartamento(),
                     "Empleado Encontrado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
