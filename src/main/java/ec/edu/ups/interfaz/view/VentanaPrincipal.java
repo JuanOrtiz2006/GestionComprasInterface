@@ -80,7 +80,14 @@ public class VentanaPrincipal extends Frame {
         botonOpcionesEmpleado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirVentanaRegistroEmpleado();
+                new VentanaRegistroEmpleado();
+            }
+        });
+
+        botonOpcionesProvedor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaRegistroProvedor();
             }
         });
     }
@@ -112,11 +119,6 @@ public class VentanaPrincipal extends Frame {
         }
 
         return panel;
-    }
-
-    //Metodo para abrir la ventana de registro de empleados
-    private void abrirVentanaRegistroEmpleado() {
-        new VentanaRegistroEmpleado();
     }
 
     public static void main(String[] args) {
