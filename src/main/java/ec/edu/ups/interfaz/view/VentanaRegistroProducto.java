@@ -161,6 +161,12 @@ public class VentanaRegistroProducto extends Frame{
             }
         });
 
+        addWindowListener( new java.awt.event.WindowAdapter(){
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                dispose(); // Cierra solo esta ventana
+            }
+        });
+
     }
 
     public void registrarProducto(){
