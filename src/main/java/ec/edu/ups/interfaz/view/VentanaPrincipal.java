@@ -15,7 +15,7 @@ public class VentanaPrincipal extends Frame {
     private VentanaRegistroEmpleado ventanaRegistroEmpleado;
     private VentanaRegistroProvedor ventanaRegistroProvedor;
     private VentanaRegistroProducto ventanaRegistroProducto;
-
+    private VentanaRegistroSolicitud ventanaRegistroSolicitud;
     private java.util.List<Empleado> listaEmpleados = new ArrayList<>();
     private java.util.List<Proveedor> listaProvedores = new ArrayList<>();
     private java.util.List<Producto> listaProductos = new ArrayList<>();
@@ -117,6 +117,17 @@ public class VentanaPrincipal extends Frame {
                     ventanaRegistroProducto = new VentanaRegistroProducto();
                 } else {
                     ventanaRegistroProducto.setVisible(true);
+                }
+            }
+        });
+        //Evento para el boton de productos
+        botonOpcionesSolicitud.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ventanaRegistroSolicitud == null) {
+                    ventanaRegistroSolicitud = new VentanaRegistroSolicitud();
+                } else {
+                    ventanaRegistroSolicitud.setVisible(true);
                 }
             }
         });
