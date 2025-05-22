@@ -94,7 +94,7 @@ panelGeneral = new Panel(new BorderLayout(4, 1));
 
 panelNorte = new Panel();
 panelSur = new Panel(new GridLayout(1,5));
-labelTitulo = new Label("Registro de Solicitud");
+labelTitulo = new Label("Registro de Solicitud:");
         panelNorte.add(labelTitulo);
 
 panelCentral = new Panel(new BorderLayout(3, 1));
