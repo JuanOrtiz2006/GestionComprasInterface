@@ -1,8 +1,8 @@
         package ec.edu.ups.interfaz.view;
+        import java.text.SimpleDateFormat;
         import java.util.List;
-        import ec.edu.ups.interfaz.clases.Empleado;
-        import ec.edu.ups.interfaz.clases.Producto;
-        import ec.edu.ups.interfaz.clases.Proveedor;
+
+        import ec.edu.ups.interfaz.clases.*;
 
         import javax.swing.*;
         import java.awt.*;
@@ -26,6 +26,7 @@
             private java.util.List<Empleado> listaEmpleados = new ArrayList<>();
             private java.util.List<Proveedor> listaProvedores = new ArrayList<>();
             private List<Producto> listaProductos = new ArrayList<>();
+            private List<SolicitudDeCompra> listaSolicitudes = new ArrayList<>();
 
             private Panel panelGeneral;
             private Panel panelNorte;
@@ -113,6 +114,7 @@
                             ventanaRegistroProvedor = new VentanaRegistroProvedor();
                         } else {
                             ventanaRegistroProvedor.setVisible(true);
+                            listaEmpleados = ventanaRegistroEmpleado.getListaEmpleados();
                         }
                     }
                 });
@@ -121,7 +123,7 @@
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (ventanaRegistroProducto == null) {
-
+                            ventanaRegistroProducto = new VentanaRegistroProducto();
 
                         } else {
                             ventanaRegistroProducto.setVisible(true);
@@ -142,6 +144,7 @@
                         // Actualizar listaProductos de instancia con la lista de la ventana producto
                         listaProductos = ventanaRegistroProducto.getListaProductos();
 
+
                         // Antes de crear la ventana de solicitud
                         if (ventanaRegistroProducto == null) {
                             ventanaRegistroProducto = new VentanaRegistroProducto();
@@ -152,10 +155,20 @@
                             System.out.println(p.getCodigo() + " - " + p.getNombre());
                         }
 
-                        ventanaRegistroSolicitud = new VentanaRegistroSolicitud(listaProductos);
+                        if (ventanaRegistroEmpleado == null) {
+                            ventanaRegistroEmpleado = new VentanaRegistroEmpleado();
+                        }
+                        listaEmpleados = ventanaRegistroEmpleado.getListaEmpleados();
+
+                        List<Empleado> empleadoList = ventanaRegistroEmpleado.getListaEmpleados();
+                        System.out.println("Empleados al crear ventana solicitud: " + listaProductos.size());
+                        for (Empleado em : empleadoList) {
+                            System.out.println(em.getNombre() + " - " +em.getCedula());
+                        }
+                        ventanaRegistroSolicitud = new VentanaRegistroSolicitud(listaProductos, listaEmpleados, listaSolicitudes);
                         ventanaRegistroSolicitud.setVisible(true);
 
-                        ventanaRegistroSolicitud.setVisible(true);
+
                     }
                 });
                 //Evento para el boton de Imprimir Informacion
@@ -262,6 +275,37 @@
                         }
                     }
                 }
+                informacion.append("\nLista de Solicitudes:\n");
+
+// Verificamos si la ventana de solicitudes existe
+                if (ventanaRegistroSolicitud == null) {
+                    informacion.append("No hay solicitudes registradas.\n");
+                } else {
+                    listaSolicitudes = ventanaRegistroSolicitud.getListaSolicitudes();
+                    if (listaSolicitudes.isEmpty()) {
+                        informacion.append("No hay solicitudes registradas.\n");
+                    } else {
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+                        for (SolicitudDeCompra solicitud : listaSolicitudes) {
+                            informacion.append("\nCódigo: ").append(solicitud.getIdSolicitud())
+                                    .append(" Fecha: ").append(formato.format(solicitud.getFechaSolicitud().getTime()))
+                                    .append(" Estado: ").append(solicitud.getEstadoSolicitud())
+                                    .append(" Empleado: ").append(solicitud.getSolicitante().getNombre());
+
+                            // Imprimir los detalles de la solicitud
+                            informacion.append("\n  Detalles:\n");
+                            for (DetalleCompra detalle : solicitud.getDetalleCompras()) {
+                                informacion.append("    - Producto: ").append(detalle.getProducto().getNombre())
+                                        .append(", Cantidad: ").append(detalle.getCantidad())
+                                        .append(", Precio: ").append(detalle.calcularCostoTotal())
+                                        .append("\n");
+                            }
+                        }
+
+                    }
+                    }
+
 
 
                 // Mostrar la información en un JOptionPane

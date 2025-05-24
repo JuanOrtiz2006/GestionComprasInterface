@@ -63,6 +63,7 @@ public class VentanaRegistroEmpleado extends Frame{
         textRegistroCedula = new TextField();
         labelRegistroDepartamento = new Label("Ingrese el Departamento al que pertenece:");
         choiceDepartamento = new Choice();
+        choiceDepartamento.add("Ingrese una opcion:");
         choiceDepartamento.add("SECRETARIA");
         choiceDepartamento.add("ADMINISTRACION");
         choiceDepartamento.add("EJECUTIVO");

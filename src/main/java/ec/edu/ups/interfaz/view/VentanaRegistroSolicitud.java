@@ -2,10 +2,8 @@ package ec.edu.ups.interfaz.view;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import ec.edu.ups.interfaz.clases.DetalleCompra;
-import ec.edu.ups.interfaz.clases.Producto;
-import ec.edu.ups.interfaz.clases.Proveedor;
-import ec.edu.ups.interfaz.clases.SolicitudDeCompra;
+
+import ec.edu.ups.interfaz.clases.*;
 import ec.edu.ups.interfaz.enums.EstadoSolicitud;
 
 import javax.swing.*;
@@ -19,6 +17,7 @@ public class VentanaRegistroSolicitud extends Frame {
     private List<Producto> listaProductosExternos;
     private List<DetalleCompra> listaDetalleCompras;
     private List<SolicitudDeCompra> listaSolicitudes;
+    private List<Empleado>  listaEmpleadosExternos;
 
     private Panel panelGeneral;
     private Panel panelNorte;
@@ -62,16 +61,17 @@ public class VentanaRegistroSolicitud extends Frame {
     private Button botonCalcularTotal;
 
     private Choice choiceProducto;
-    private Choice choiceEstado;
+    private Choice choiceEmpleado;
 
 
 
 
-    public VentanaRegistroSolicitud(List<Producto> listaProductosExternos) {
+    public VentanaRegistroSolicitud(List<Producto> listaProductosExternos, List<Empleado> listaEmpleadosExternos, List<SolicitudDeCompra> listaSolicitudesExterna) {
 
-
+        this.listaSolicitudes = listaSolicitudesExterna;
         listaDetalleCompras = new java.util.ArrayList<>();  // Inicializa atributo correctamente
         listaSolicitudes = new java.util.ArrayList<>();
+        this.listaEmpleadosExternos = new java.util.ArrayList<>();
         this.listaProductosExternos = listaProductosExternos;
 
         if (listaProductosExternos == null) {
@@ -80,9 +80,21 @@ public class VentanaRegistroSolicitud extends Frame {
             this.listaProductosExternos = listaProductosExternos;
         }
 
+
+        if ( listaEmpleadosExternos == null) {
+            this.listaEmpleadosExternos = new java.util.ArrayList<>();
+        } else {
+            this.listaEmpleadosExternos = listaEmpleadosExternos;
+        }
+
         System.out.println("Productos recibidos en solicitud: " + listaProductosExternos.size());
         for (Producto p : listaProductosExternos) {
         System.out.println("Producto: " + p.getCodigo() + " - " + p.getNombre());
+        }
+
+        System.out.println("Empleados en solicitud: " + listaEmpleadosExternos.size());
+        for (Empleado pr : listaEmpleadosExternos) {
+                System.out.println("Proveedor: " + pr.getCedula()+ " - " + pr.getNombre());
         }
 
 
@@ -109,6 +121,12 @@ textFecha = new TextField();
         textFecha.setText(fechaFormateada);
         textFecha.setEditable(false);
 panelCodigo = new Panel(new GridLayout(1, 2));
+panelCodigo.add(new Label("Empleado:"));
+choiceEmpleado = new Choice();
+for (Empleado em : listaEmpleadosExternos) {
+    choiceEmpleado.add(em.getNombre());
+}
+panelCodigo.add(choiceEmpleado);
 
 labelRegistroId = new Label("Codigo:");
 textRegistroId = new TextField();
@@ -148,10 +166,10 @@ checkDesaprovado = new Checkbox("Rechazar");
 checkPendiente = new Checkbox("Pendiente");
 checkSolicitado= new Checkbox("Solicitado");
 
-        checkAprovado.addItemListener(e -> validarCheckBox(checkAprovado));
-        checkDesaprovado.addItemListener(e -> validarCheckBox(checkDesaprovado));
-        checkPendiente.addItemListener(e -> validarCheckBox(checkPendiente));
-        checkSolicitado.addItemListener(e -> validarCheckBox(checkSolicitado));
+        checkAprovado.addItemListener(e -> validarCheckBoxXD(checkAprovado));
+        checkDesaprovado.addItemListener(e -> validarCheckBoxXD(checkDesaprovado));
+        checkPendiente.addItemListener(e -> validarCheckBoxXD(checkPendiente));
+        checkSolicitado.addItemListener(e -> validarCheckBoxXD(checkSolicitado));
 
 botonRegistrar = new Button("Registrar");
 
@@ -206,8 +224,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         registrarSolicitud();
     }
 });
-
-        choiceProducto.addItemListener(new ItemListener() {
+    choiceProducto.addItemListener(new ItemListener() {
     @Override
     public void itemStateChanged(ItemEvent e) {
         System.out.println("Hola mundo");
@@ -216,13 +233,23 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             Producto productoSeleccionado = listaProductosExternos.get(index);
             textADescripcion.setText(productoSeleccionado.getNombre());
             textPrecioU.setText(String.valueOf(productoSeleccionado.getPrecioU()));
-
-            // Opcional: limpiar cantidad y total cuando cambias producto
             textCantidad.setText("");
             textPrecioT.setText("");
         }
     }
 });
+
+        final List<Empleado> listaEmpleadosFinal = listaEmpleadosExternos;
+        choiceEmpleado.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println("Hola mundo");
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    int indx = choiceEmpleado.getSelectedIndex();
+                    Empleado empleadoSelecccionado = listaEmpleadosFinal.get(indx);
+                }
+            }
+        });
 
         textCantidad.addTextListener(new java.awt.event.TextListener() {
     public void textValueChanged(java.awt.event.TextEvent e) {
@@ -265,6 +292,8 @@ public void añadirDetalle() {
         JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida y una descripción.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
+    int indx = choiceEmpleado.getSelectedIndex();
+    Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indx);
 
     DetalleCompra detalle = new DetalleCompra(cantidad, productoSeleccionado, descripcion);
     listaDetalleCompras.add(detalle);
@@ -313,10 +342,14 @@ public void registrarSolicitud() {
     solicitud.setIdSolicitud(codigo);
     solicitud.setFechaSolicitud(fecha);
     solicitud.setEstadoSolicitud(estado);
+    int indexEmpleado = choiceEmpleado.getSelectedIndex();
+    Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indexEmpleado);
+    solicitud.setSolicitante(empleadoSeleccionado);
     solicitud.getDetalleCompras().addAll(listaDetalleCompras);
 
     // Si tienes solicitante (empleado) puedes setearlo aquí
     // solicitud.setSolicitante(empleadoActual);
+    System.out.println("listaSolicitudes es nula? " + (this.listaSolicitudes == null));
 
     listaSolicitudes.add(solicitud); // Guardar en la lista general (si se desea)
 
@@ -339,10 +372,15 @@ public void registrarSolicitud() {
         textPrecioU.setText(String.valueOf(prod.getPrecioU()));
     }
 
+    for (Empleado e : listaEmpleadosExternos) {
+        choiceEmpleado.add(e.getCedula() + " - " + e.getNombre() + " - "+ e.getDepartamento());
+
+    }
+
 }
 
 
-
+/*
 public void validarCheckBox(Checkbox checkbox){
     if (checkAprovado.getState() == true && checkbox.getLabel().equals("APROBADA") ){
         checkDesaprovado.setState(false);
@@ -366,25 +404,20 @@ public void validarCheckBox(Checkbox checkbox){
     }
 }
 
-public void validarCheckBoxXD(Checkbox seleccionado) {
-    if (seleccionado == checkAprovado) {
-        checkDesaprovado.setState(false);
-        checkPendiente.setState(false);
-        checkSolicitado.setState(false);
-    } else if (seleccionado == checkDesaprovado) {
-        checkAprovado.setState(false);
-        checkPendiente.setState(false);
-        checkSolicitado.setState(false);
-    } else if (seleccionado == checkPendiente) {
-        checkAprovado.setState(false);
-        checkDesaprovado.setState(false);
-        checkSolicitado.setState(false);
-    } else if (seleccionado == checkSolicitado) {
-        checkAprovado.setState(false);
-        checkDesaprovado.setState(false);
-        checkPendiente.setState(false);
+ */
+
+    public void validarCheckBoxXD(Checkbox seleccionado) {
+        if (seleccionado.getState()) {
+            checkAprovado.setState(seleccionado == checkAprovado);
+            checkDesaprovado.setState(seleccionado == checkDesaprovado);
+            checkPendiente.setState(seleccionado == checkPendiente);
+            checkSolicitado.setState(seleccionado == checkSolicitado);
+        }
     }
-}
+    public List<SolicitudDeCompra> getListaSolicitudes(){
+        return listaSolicitudes;
+    }
+
 
 
 
