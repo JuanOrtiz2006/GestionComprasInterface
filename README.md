@@ -36,237 +36,38 @@ Para ejecutar correctamente el proyecto:
 ## 🧑‍💻 Ejemplo de Visualizacion e Interaccion:
 
 ```plaintext
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 1
+### Ventana Principal 
+![Captura de pantalla 2025-05-25 003456](https://github.com/user-attachments/assets/94a8da06-873f-4b44-853b-8c68c9cc945a)
 
-Registrar proveedor
-Ingrese la Empresa:
-> Acme Corporation
-Ingrese el nombre del proveedor:
-> Juan Pérez
-Ingrese el correo del proveedor:
-> juan.perez@acme.com
-Ingrese la cédula del proveedor:
-> 1234567890
+### Ingreso de Empleados
+![image](https://github.com/user-attachments/assets/9fa862d0-0c3f-415f-a7bc-65573a61980d)
+### Busqueda de Empleados
+![image](https://github.com/user-attachments/assets/59cbdd26-4d1b-4241-9e07-4eddc8b4bd2d)
 
-Proveedor registrado correctamente...
+### Ingreso de Proveedores
+![image](https://github.com/user-attachments/assets/80c8836a-c490-4b1c-a6c9-84cdcddbefa5)
+### Busqueda de Proveedores
+![image](https://github.com/user-attachments/assets/61124b7d-159e-41e9-9932-a1e70d819f9a)
 
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 2
+### Ingreso de Productos
+![image](https://github.com/user-attachments/assets/96f326b7-236b-4b11-8cf2-f4f1abe270b2)
+### Busqueda de Productos
+![image](https://github.com/user-attachments/assets/05ff2a3e-30d5-4bec-a358-2c40ffa885cf)
 
-Registrar producto
-¿Qué tipo de producto desea registrar?: 
-1. Artículos
-2. Paquete
-3. Servicios
-> 1
+### Registro de Solicitud
+#### Productos
+![image](https://github.com/user-attachments/assets/0f88896a-e549-4937-bbaa-170b846e6c01)
 
-Ingrese el código del Artículo:
-> A001
-Ingrese el nombre del Artículo:
-> Laptop Dell XPS
-Ingrese el precio unitario del Artículo:
-> 1500.00
-Ingrese el IVA del Producto:
-> 0.16
-
-Seleccione el tipo de producto:
-1. ELECTRONICA
-2. ALIMENTO
-3. LIMPIEZA
-4. SERVICIO
-> 1
-
-Producto registrado correctamente...
-
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 3
-
-Fecha de Solicitud-----
-Ingrese el día de la fecha de la solicitud:
-> 15
-Ingrese el mes de la fecha de la solicitud: (1-12)
-> 4
-Ingrese el año de la fecha de la solicitud:
-> 2025
-
-Detalles de compra
-Ingrese el código del producto a agregar:
-> A001
-
-Producto encontrado: Laptop Dell XPS
-Cantidad:
-> 2
-Descripción:
-> Laptops para el equipo de desarrollo
-
-Producto agregado al detalle de compra.
-
-¿Desea agregar otro producto? (Si/No)
-> Si
-
-Ingrese el código del producto a agregar:
-> P002
-
-Producto encontrado: Paquete de Oficinas Básico
-Cantidad:
-> 1
-Descripción:
-> Paquete de muebles para la nueva sucursal
-
-Producto agregado al detalle de compra.
-
-¿Desea agregar otro producto? (Si/No)
-> No
-
-Solicitud de compra registrada correctamente...
+![image](https://github.com/user-attachments/assets/a0c4c412-f0f4-44f1-97ad-4ceeb5b93422)
 
 
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 9
+### Solicitud:
+![image](https://github.com/user-attachments/assets/beed0ecc-b3d7-4227-b504-03ecba955a8f)
 
-Ingrese el número de la solicitud de compra que desea buscar:
-> 1001
-
-Solicitud encontrada:
-- Número de solicitud: 1001
-- Fecha: 15/04/2025
-- Productos:
-  - Laptop Dell XPS (Cantidad: 2) - Laptops para el equipo de desarrollo
-  - Paquete de Oficinas Básico (Cantidad: 1) - Paquete de muebles para la nueva sucursal
-- Estado: Pendiente
+### Imprimir Informacion, lista de todos.
+![image](https://github.com/user-attachments/assets/d48c1e9c-7460-4d27-b198-2e31f38a3df8)
 
 
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 10
-
-Ingrese el número de la solicitud de compra que desea aprobar o rechazar:
-> 1001
-
-Solicitud encontrada:
-- Número de solicitud: 1001
-- Estado actual: Pendiente
-
-¿Qué acción desea realizar?
-1. Aprobar
-2. Rechazar
-Seleccione una opción:
-> 1
-
-La solicitud de compra ha sido aprobada exitosamente.
-
-
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 9
-
-Ingrese el número de la solicitud de compra que desea buscar:
-> 1001
-
-Solicitud encontrada:
-- Número de solicitud: 1001
-- Fecha: 15/04/2025
-- Productos:
-  - Laptop Dell XPS (Cantidad: 2) - Laptops para el equipo de desarrollo
-  - Paquete de Oficinas Básico (Cantidad: 1) - Paquete de muebles para la nueva sucursal
-- Estado: Aprobada
-
-1. Registrar proveedor
-2. Registrar producto
-3. Registrar solicitud de compra
-4. Listar proveedores
-5. Listar productos
-6. Listar solicitudes de compra
-7. Buscar proveedor por ID
-8. Buscar producto por nombre
-9. Buscar solicitud por número
-10. Aprobar / Rechazar solicitud de compra
-11. Calcular total de una solicitud
-12. Ingresar un empleado
-13. Salir
-Seleccione una opción: 9
-
-Ingrese el número de la solicitud de compra que desea buscar:
-> 1001
-
-Solicitud encontrada:
-- Número de solicitud: 1001
-- Fecha: 15/04/2025
-- Productos:
-  - Laptop Dell XPS (Cantidad: 2) - Laptops para el equipo de desarrollo
-  - Paquete de Oficinas Básico (Cantidad: 1) - Paquete de muebles para la nueva sucursal
-- Estado: Pendiente
 
 
 
