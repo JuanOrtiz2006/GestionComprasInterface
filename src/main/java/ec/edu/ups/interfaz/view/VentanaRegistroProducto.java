@@ -67,6 +67,7 @@ public class VentanaRegistroProducto extends Frame{
         panelOpciones = new Panel(new GridLayout(13,1));
         labelTipo = new Label("Ingrese el tipo de producto");
         choiceTipo = new Choice();
+        choiceTipo.add("Seleccione el tipo de producto: ");
         choiceTipo.add("ARTICULO");
         choiceTipo.add("PAQUETE");
         choiceTipo.add("SERVICIO");
@@ -78,6 +79,7 @@ public class VentanaRegistroProducto extends Frame{
         textPrecio = new TextField();
         labelClase = new Label("Eliga la clase de producto");
         choiceClase = new Choice();
+        choiceClase.add("Seleccione el tipo: ");
         choiceClase.add("LIMPIEZA");
         choiceClase.add("ALIMENTO");
         choiceClase.add("MASCOTAS");
@@ -124,6 +126,7 @@ public class VentanaRegistroProducto extends Frame{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED){
                     tipo = choiceTipo.getSelectedItem();
+
                     if (tipo == "ARTICULO"){
                         labelAdicion.setText("Ingrese el IVA: ");
                     }
@@ -131,7 +134,7 @@ public class VentanaRegistroProducto extends Frame{
                         labelAdicion.setText("Ingrese el peso en kg");
                     }
                     if (tipo == "SERVICIO"){
-                        labelAdicion.setText("Ingrese el servicio");
+                        labelAdicion.setText("Ingrese las horas del servicio");
                     }
                 }
             }
