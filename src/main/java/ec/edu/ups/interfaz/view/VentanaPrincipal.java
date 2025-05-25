@@ -51,7 +51,7 @@
 
                 //Panel Superior
                 panelNorte = new Panel();
-                titulo = new Label("Bienvenido");
+                titulo = new Label("Bienvenido Al Sistema de Gestion de Compras UPS");
                 panelNorte.add(titulo);
 
                 //Panel Central
@@ -59,25 +59,25 @@
                 // Panel de Empleados
                 panelEmpleados = new Panel(new BorderLayout(2, 1));
                 panelEmpleados.add(crearPanelConImagen("Empleados", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenEmpleados.png"), BorderLayout.NORTH);
-                botonOpcionesEmpleado = new Button("Opciones");
+                botonOpcionesEmpleado = new Button("    AÑADIR  ");
                 panelEmpleados.add(botonOpcionesEmpleado);
                 panelCentral.add(panelEmpleados);
                 // Panel de Proveedores
                 panelProvedores = new Panel(new BorderLayout(2, 1));
                 panelProvedores.add(crearPanelConImagen("Proveedores", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenProvedores.png"), BorderLayout.NORTH);
-                botonOpcionesProvedor = new Button("Opciones");
+                botonOpcionesProvedor = new Button("    AÑADIR  ");
                 panelProvedores.add(botonOpcionesProvedor);
                 panelCentral.add(panelProvedores);
                 // Panel de Productos
                 panelProductos = new Panel(new BorderLayout(2, 1));
                 panelProductos.add(crearPanelConImagen("Productos", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenProducto.png"), BorderLayout.NORTH);
-                botonOpcionesProducto = new Button("Opciones");
+                botonOpcionesProducto = new Button("    AÑADIR  ");
                 panelProductos.add(botonOpcionesProducto);
                 panelCentral.add(panelProductos);
                 // Panel de Solicitudes
                 panelSolicitudes = new Panel(new BorderLayout(2, 1));
                 panelSolicitudes.add(crearPanelConImagen("Solicitudes", "src/main/java/ec/edu/ups/interfaz/imagenes/imagenSolicitud.png"), BorderLayout.NORTH);
-                botonOpcionesSolicitud = new Button("Opciones");
+                botonOpcionesSolicitud = new Button("   AÑADIR  ");
                 panelSolicitudes.add(botonOpcionesSolicitud);
                 panelCentral.add(panelSolicitudes);
 
