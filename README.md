@@ -1,5 +1,5 @@
 
-# Práctica de laboratorio 01: Diseño y desarrollo de una aplicación orientada a objetos utilizando Java
+# Práctica de laboratorio 02: Práctica de laboratorio 02 - Diseño de una interfaz gráfica de usuario básica utilizando contenedores y componentes gráficos de Java
 ## Diagrama UML
 ![image](https://github.com/user-attachments/assets/5e32f394-8887-410d-914b-ee7413e3f6bd)
 ![image](https://github.com/user-attachments/assets/2f5551fd-9764-4d76-aa9b-d7add44d209c)
@@ -7,18 +7,18 @@
 
 ## 📌 Información General
 
-- **Título:** Práctica de laboratorio 01: Diseño y desarrollo de una aplicación orientada a objetos utilizando Java
+- **Título:** Diseño de una interfaz gráfica de usuario básica utilizando contenedores y componentes gráficos de Java AWT
 - **Asignatura:** Programacion Orientada A Objetos
 - **Carrera:** Computación
 - **Estudiantes:** Mateo Eduardo Molina Chamba y Juan Pablo Ortiz Torres
-- **Fecha:** 27-04-2025
+- **Fecha:** 25-05-2025
 - **Profesor:** Ing. Gabriel León
 
 ---
 
 ## 🛠️ Descripción
 ### Sistema de Gestión de Compras ERP:
-Permite registrar proveedores, productos (artículos, paquetes y servicios) y empleados, así como crear y administrar solicitudes de compra. Cada solicitud puede cambiar su estado (solicitada, en revisión, aprobada o rechazada) y calcular su costo total basado en los productos asociados. La interacción con el usuario se realiza a través de un menú en consola, facilitando la consulta, registro, actualización y búsqueda de la información.
+Usando la interfaz gráfica de JAVA, incluyendo sus librerias de AWT y Swing. Construimos una estructura visual interactiva para agilizar el ingreso de datos. Usando sus interfaces interactivas nos permite registrar proveedores, productos (artículos, paquetes y servicios) y empleados, así como crear y administrar solicitudes de compra. Cada solicitud puede cambiar su estado (solicitada, en revisión, aprobada o rechazada) y calcular su costo total basado en los productos asociados. La interacción con el usuario se realiza a través de un menú en consola, facilitando la consulta, registro, actualización y búsqueda de la información.
 
 ---
 
@@ -33,7 +33,7 @@ Para ejecutar correctamente el proyecto:
 3. Importante ingresar, los proveedores, empelados y productos,
    antes de hacer las solicitudes de compra, o querer listar.
     
-## 🧑‍💻 Ejemplo de Entrada
+## 🧑‍💻 Ejemplo de Visualizacion e Interaccion:
 
 ```plaintext
 1. Registrar proveedor
