@@ -129,12 +129,15 @@ public class VentanaRegistroProducto extends Frame{
 
                     if (tipo == "ARTICULO"){
                         labelAdicion.setText("Ingrese el IVA: ");
+                        textCodigo.setText("A-1");
                     }
                     if (tipo == "PAQUETE"){
                         labelAdicion.setText("Ingrese el peso en kg");
+                        textCodigo.setText("P-1");
                     }
                     if (tipo == "SERVICIO"){
                         labelAdicion.setText("Ingrese las horas del servicio");
+                        textCodigo.setText("S-1");
                     }
                 }
             }
