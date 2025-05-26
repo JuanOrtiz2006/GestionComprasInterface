@@ -185,6 +185,11 @@ public class VentanaRegistroProducto extends Frame{
             return;
         }
 
+        if (!validarCodigo(codigo)) {
+            JOptionPane.showMessageDialog(this, "El codigo es Incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if ("ARTICULO".equals(tipo)){
             iva= Float.parseFloat(textAdicional.getText());
             articulo = new Articulo(codigo,nombre,precio,claseProducto, iva);
@@ -195,7 +200,7 @@ public class VentanaRegistroProducto extends Frame{
                             "Precio: " + articulo.getPrecioU() + "\n" +
                             "Tipo: " + articulo.getTipoProducto() + "\n" +
                             "IVA: " + articulo.getIVA(),
-                        "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
         }
         if ("PAQUETE".equals(tipo)){
             peso = Float.parseFloat(textAdicional.getText());
@@ -218,7 +223,7 @@ public class VentanaRegistroProducto extends Frame{
                             "Nombre: " + servicio.getNombre() + "\n" +
                             "Precio: " + servicio.getPrecioU() + "\n" +
                             "Tipo: " + servicio.getTipoProducto() + "\n" +
-                            "IVA: " + servicio.getTiempoHoras(),
+                            "Horas: " + servicio.getTiempoHoras(),
                     "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -260,6 +265,31 @@ public class VentanaRegistroProducto extends Frame{
 
         // Limpiar campo de búsqueda
         textBCodigo.setText("");
+    }
+
+    public boolean validarCodigo(String codigo) {
+        if (codigo.length() < 3) {
+            return false;
+        }
+
+        // Verificar que comienza con un prefijo válido
+        String prefijo = codigo.substring(0, 2);
+        if (!prefijo.equals("A-") && !prefijo.equals("P-") && !prefijo.equals("S-")) {
+            return false;
+        }
+
+        // Obtener la parte numérica después del prefijo
+        String numeroTexto = codigo.substring(2);
+        int numero;
+
+        try {
+            numero = Integer.parseInt(numeroTexto);
+        } catch (NumberFormatException e) {
+            return false; // No es un número válido
+        }
+
+        // Validar que el número sea mayor o igual a 0
+        return numero >= 0;
     }
 
     public List<Producto> getListaProductos(){

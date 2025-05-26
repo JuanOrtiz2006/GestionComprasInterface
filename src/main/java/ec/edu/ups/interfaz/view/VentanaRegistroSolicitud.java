@@ -89,47 +89,47 @@ public class VentanaRegistroSolicitud extends Frame {
 
         System.out.println("Productos recibidos en solicitud: " + listaProductosExternos.size());
         for (Producto p : listaProductosExternos) {
-        System.out.println("Producto: " + p.getCodigo() + " - " + p.getNombre());
+            System.out.println("Producto: " + p.getCodigo() + " - " + p.getNombre());
         }
 
         System.out.println("Empleados en solicitud: " + listaEmpleadosExternos.size());
         for (Empleado pr : listaEmpleadosExternos) {
-                System.out.println("Proveedor: " + pr.getCedula()+ " - " + pr.getNombre());
+            System.out.println("Proveedor: " + pr.getCedula()+ " - " + pr.getNombre());
         }
 
 
-setTitle("Registro de Solicitudes");
-setSize(800, 400);
-setLocationRelativeTo(null);
+        setTitle("Registro de Solicitudes");
+        setSize(800, 400);
+        setLocationRelativeTo(null);
 
-panelGeneral = new Panel(new BorderLayout(4, 1));
+        panelGeneral = new Panel(new BorderLayout(4, 1));
 
-panelNorte = new Panel();
-panelSur = new Panel(new GridLayout(1,5));
-labelTitulo = new Label("Registro de Solicitud:");
+        panelNorte = new Panel();
+        panelSur = new Panel(new GridLayout(1,5));
+        labelTitulo = new Label("Registro de Solicitud:");
         panelNorte.add(labelTitulo);
 
-panelCentral = new Panel(new BorderLayout(3, 1));
-panelOpciones = new Panel(new BorderLayout(3, 1));
+        panelCentral = new Panel(new BorderLayout(3, 1));
+        panelOpciones = new Panel(new BorderLayout(3, 1));
 
-panelInformacion = new Panel(new GridLayout(4, 1));
-labelRegistroFecha = new Label("Fecha:");
-LocalDate fechaActual = LocalDate.now();
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-String fechaFormateada = fechaActual.format(formatter);
-textFecha = new TextField();
+        panelInformacion = new Panel(new GridLayout(4, 1));
+        labelRegistroFecha = new Label("Fecha:");
+        LocalDate fechaActual = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = fechaActual.format(formatter);
+        textFecha = new TextField();
         textFecha.setText(fechaFormateada);
         textFecha.setEditable(false);
-panelCodigo = new Panel(new GridLayout(1, 2));
-panelCodigo.add(new Label("Empleado:"));
-choiceEmpleado = new Choice();
-for (Empleado em : listaEmpleadosExternos) {
-    choiceEmpleado.add(em.getNombre());
-}
-panelCodigo.add(choiceEmpleado);
+        panelCodigo = new Panel(new GridLayout(1, 2));
+        panelCodigo.add(new Label("Empleado:"));
+        choiceEmpleado = new Choice();
+        for (Empleado em : listaEmpleadosExternos) {
+            choiceEmpleado.add(em.getNombre());
+        }
+        panelCodigo.add(choiceEmpleado);
 
-labelRegistroId = new Label("Codigo:");
-textRegistroId = new TextField();
+        labelRegistroId = new Label("Codigo:");
+        textRegistroId = new TextField();
         panelCodigo.add(labelRegistroId);
         panelCodigo.add(textRegistroId);
 
@@ -138,40 +138,40 @@ textRegistroId = new TextField();
         panelInformacion.add(textFecha);
         panelInformacion.add(panelCodigo);
 
-panelDetalleCompra = new Panel(new GridLayout(3, 8));  // Ajusté filas para incluir choice
+        panelDetalleCompra = new Panel(new GridLayout(3, 8));  // Ajusté filas para incluir choice
 
-labelCodigo = new Label("Cod. Producto");
-labelCantidad = new Label("Cantidad");
-botonCalcularTotal = new Button("Calcular Total");
-labelDescripcion = new Label("Descripcion");
-labelPrecioU = new Label("Precio U");
-labelPrecioT = new Label("Precio T");
+        labelCodigo = new Label("Cod. Producto");
+        labelCantidad = new Label("Cantidad");
+        botonCalcularTotal = new Button("Calcular Total");
+        labelDescripcion = new Label("Descripcion");
+        labelPrecioU = new Label("Precio U");
+        labelPrecioT = new Label("Precio T");
 
-choiceProducto = new Choice();
+        choiceProducto = new Choice();
         for (Producto prod : listaProductosExternos) {
-        choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
+            choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
         }
 
-textCantidad = new TextField();
-textADescripcion = new TextArea();
-textPrecioU = new TextField();
+        textCantidad = new TextField();
+        textADescripcion = new TextArea();
+        textPrecioU = new TextField();
         textPrecioU.setEditable(false);
-textPrecioT = new TextField();
+        textPrecioT = new TextField();
         textPrecioT.setEditable(false);
 
-botonAdd = new Button("Añadir");
+        botonAdd = new Button("Añadir");
 
-checkAprovado = new Checkbox("Aprobar");
-checkDesaprovado = new Checkbox("Rechazar");
-checkPendiente = new Checkbox("Pendiente");
-checkSolicitado= new Checkbox("Solicitado");
+        checkAprovado = new Checkbox("Aprobar");
+        checkDesaprovado = new Checkbox("Rechazar");
+        checkPendiente = new Checkbox("Pendiente");
+        checkSolicitado= new Checkbox("Solicitado");
 
         checkAprovado.addItemListener(e -> validarCheckBoxXD(checkAprovado));
         checkDesaprovado.addItemListener(e -> validarCheckBoxXD(checkDesaprovado));
         checkPendiente.addItemListener(e -> validarCheckBoxXD(checkPendiente));
         checkSolicitado.addItemListener(e -> validarCheckBoxXD(checkSolicitado));
 
-botonRegistrar = new Button("Registrar");
+        botonRegistrar = new Button("Registrar");
 
 
 // Agregar componentes al panelDetalleCompra
@@ -199,45 +199,45 @@ botonRegistrar = new Button("Registrar");
 
         panelGeneral.add(panelNorte, BorderLayout.NORTH);
         panelGeneral.add(panelCentral, BorderLayout.CENTER);
-add(panelGeneral);
+        add(panelGeneral);
 
-setVisible(true);
+        setVisible(true);
 
-addWindowListener(new java.awt.event.WindowAdapter() {
-    public void windowClosing(java.awt.event.WindowEvent e) {
-        dispose();
-    }
-});
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                dispose();
+            }
+        });
 
 
         botonAdd.addActionListener(new java.awt.event.ActionListener() {
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-        añadirDetalle();
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                añadirDetalle();
 
 
-    }
-});
+            }
+        });
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-        registrarSolicitud();
-    }
-});
-    choiceProducto.addItemListener(new ItemListener() {
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        System.out.println("Hola mundo");
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-            int index = choiceProducto.getSelectedIndex();
-            Producto productoSeleccionado = listaProductosExternos.get(index);
-            textADescripcion.setText(productoSeleccionado.getNombre());
-            textPrecioU.setText(String.valueOf(productoSeleccionado.getPrecioU()));
-            textCantidad.setText("");
-            textPrecioT.setText("");
-        }
-    }
-});
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                registrarSolicitud();
+            }
+        });
+        choiceProducto.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println("Hola mundo");
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    int index = choiceProducto.getSelectedIndex();
+                    Producto productoSeleccionado = listaProductosExternos.get(index);
+                    textADescripcion.setText(productoSeleccionado.getNombre());
+                    textPrecioU.setText(String.valueOf(productoSeleccionado.getPrecioU()));
+                    textCantidad.setText("");
+                    textPrecioT.setText("");
+                }
+            }
+        });
 
         final List<Empleado> listaEmpleadosFinal = listaEmpleadosExternos;
         choiceEmpleado.addItemListener(new ItemListener() {
@@ -252,132 +252,132 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         });
 
         textCantidad.addTextListener(new java.awt.event.TextListener() {
-    public void textValueChanged(java.awt.event.TextEvent e) {
-        try {
-            int cantidad = Integer.parseInt(textCantidad.getText());
-            double precioUnitario = Double.parseDouble(textPrecioU.getText());
-            double precioTotal = cantidad * precioUnitario;
-            textPrecioT.setText(String.format("%.2f", precioTotal));
-        } catch (NumberFormatException ex) {
-            textPrecioT.setText("");
+            public void textValueChanged(java.awt.event.TextEvent e) {
+                try {
+                    int cantidad = Integer.parseInt(textCantidad.getText());
+                    double precioUnitario = Double.parseDouble(textPrecioU.getText());
+                    double precioTotal = cantidad * precioUnitario;
+                    textPrecioT.setText(String.format("%.2f", precioTotal));
+                } catch (NumberFormatException ex) {
+                    textPrecioT.setText("");
+                }
+            }
+        });
+    }
+
+    public void actualizarListaProductos(List<Producto> productos) {
+        this.listaProductosExternos = productos;
+        choiceProducto.removeAll();
+        for (Producto prod : productos) {
+            choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
+            textPrecioU.setText(String.valueOf(prod.getPrecioU()));
         }
+
     }
-});
+
+    public void registrarPrecio() {
+
+    }
+
+
+    public void añadirDetalle() {
+
+        int index = choiceProducto.getSelectedIndex();
+        Producto productoSeleccionado = listaProductosExternos.get(index);
+
+        int cantidad = Integer.parseInt(textCantidad.getText().trim());
+        String descripcion = textADescripcion.getText().trim();
+
+        if (cantidad <= 0 || descripcion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida y una descripción.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int indx = choiceEmpleado.getSelectedIndex();
+        Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indx);
+
+        DetalleCompra detalle = new DetalleCompra(cantidad, productoSeleccionado, descripcion);
+        listaDetalleCompras.add(detalle);
+
+        JOptionPane.showMessageDialog(this, "Producto añadido al detalle:\n" + detalle.toString(), "Añadido", JOptionPane.INFORMATION_MESSAGE);
+
+
+        textCantidad.setText("");
+        textADescripcion.setText("");
+        textPrecioU.setText("");
+        textPrecioT.setText("");
+    }
+
+    public void registrarSolicitud() {
+        String codigo = textRegistroId.getText().trim();
+
+        if (codigo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un código de solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-public void actualizarListaProductos(List<Producto> productos) {
-    this.listaProductosExternos = productos;
-    choiceProducto.removeAll();
-    for (Producto prod : productos) {
-        choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
-        textPrecioU.setText(String.valueOf(prod.getPrecioU()));
-    }
+        if (listaDetalleCompras.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se han añadido productos a la solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-}
+        EstadoSolicitud estado = null;
+        if (checkAprovado.getState()) {
+            estado = EstadoSolicitud.APROBADA;
+        } else if (checkDesaprovado.getState()) {
+            estado = EstadoSolicitud.RECHAZADA;
+        } else if (checkPendiente.getState()) {
+            estado = EstadoSolicitud.EN_REVISION;
+        } else if (checkSolicitado.getState()) {
+            estado = EstadoSolicitud.SOLICITADA;
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un estado para la solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-public void registrarPrecio() {
+        // Crear fecha
+        GregorianCalendar fecha = new GregorianCalendar();
 
-}
+        // Crear la solicitud
+        SolicitudDeCompra solicitud = new SolicitudDeCompra();
+        solicitud.setIdSolicitud(codigo);
+        solicitud.setFechaSolicitud(fecha);
+        solicitud.setEstadoSolicitud(estado);
+        int indexEmpleado = choiceEmpleado.getSelectedIndex();
+        Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indexEmpleado);
+        solicitud.setSolicitante(empleadoSeleccionado);
+        solicitud.getDetalleCompras().addAll(listaDetalleCompras);
 
+        // Si tienes solicitante (empleado) puedes setearlo aquí
+        // solicitud.setSolicitante(empleadoActual);
+        System.out.println("listaSolicitudes es nula? " + (this.listaSolicitudes == null));
 
-public void añadirDetalle() {
+        listaSolicitudes.add(solicitud); // Guardar en la lista general (si se desea)
 
-    int index = choiceProducto.getSelectedIndex();
-    Producto productoSeleccionado = listaProductosExternos.get(index);
+        JOptionPane.showMessageDialog(this, "Solicitud registrada:\n" + solicitud.toString(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-    int cantidad = Integer.parseInt(textCantidad.getText().trim());
-    String descripcion = textADescripcion.getText().trim();
+        // Limpiar campos
+        textRegistroId.setText("");
+        listaDetalleCompras.clear();
+        textCantidad.setText("");
+        textADescripcion.setText("");
+        textPrecioU.setText("");
+        textPrecioT.setText("");
+        checkAprovado.setState(false);
+        checkDesaprovado.setState(false);
+        checkPendiente.setState(false);
+        checkSolicitado.setState(false);
 
-    if (cantidad <= 0 || descripcion.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida y una descripción.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    int indx = choiceEmpleado.getSelectedIndex();
-    Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indx);
+        for (Producto prod : listaProductosExternos) {
+            choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
+            textPrecioU.setText(String.valueOf(prod.getPrecioU()));
+        }
 
-    DetalleCompra detalle = new DetalleCompra(cantidad, productoSeleccionado, descripcion);
-    listaDetalleCompras.add(detalle);
+        for (Empleado e : listaEmpleadosExternos) {
+            choiceEmpleado.add(e.getCedula() + " - " + e.getNombre() + " - "+ e.getDepartamento());
 
-    JOptionPane.showMessageDialog(this, "Producto añadido al detalle:\n" + detalle.toString(), "Añadido", JOptionPane.INFORMATION_MESSAGE);
-
-
-    textCantidad.setText("");
-    textADescripcion.setText("");
-    textPrecioU.setText("");
-    textPrecioT.setText("");
-}
-
-public void registrarSolicitud() {
-    String codigo = textRegistroId.getText().trim();
-
-    if (codigo.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese un código de solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    if (listaDetalleCompras.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No se han añadido productos a la solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    EstadoSolicitud estado = null;
-    if (checkAprovado.getState()) {
-        estado = EstadoSolicitud.APROBADA;
-    } else if (checkDesaprovado.getState()) {
-        estado = EstadoSolicitud.RECHAZADA;
-    } else if (checkPendiente.getState()) {
-        estado = EstadoSolicitud.EN_REVISION;
-    } else if (checkSolicitado.getState()) {
-        estado = EstadoSolicitud.SOLICITADA;
-    } else {
-        JOptionPane.showMessageDialog(this, "Seleccione un estado para la solicitud.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Crear fecha
-    GregorianCalendar fecha = new GregorianCalendar();
-
-    // Crear la solicitud
-    SolicitudDeCompra solicitud = new SolicitudDeCompra();
-    solicitud.setIdSolicitud(codigo);
-    solicitud.setFechaSolicitud(fecha);
-    solicitud.setEstadoSolicitud(estado);
-    int indexEmpleado = choiceEmpleado.getSelectedIndex();
-    Empleado empleadoSeleccionado = listaEmpleadosExternos.get(indexEmpleado);
-    solicitud.setSolicitante(empleadoSeleccionado);
-    solicitud.getDetalleCompras().addAll(listaDetalleCompras);
-
-    // Si tienes solicitante (empleado) puedes setearlo aquí
-    // solicitud.setSolicitante(empleadoActual);
-    System.out.println("listaSolicitudes es nula? " + (this.listaSolicitudes == null));
-
-    listaSolicitudes.add(solicitud); // Guardar en la lista general (si se desea)
-
-    JOptionPane.showMessageDialog(this, "Solicitud registrada:\n" + solicitud.toString(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-    // Limpiar campos
-    textRegistroId.setText("");
-    listaDetalleCompras.clear();
-    textCantidad.setText("");
-    textADescripcion.setText("");
-    textPrecioU.setText("");
-    textPrecioT.setText("");
-    checkAprovado.setState(false);
-    checkDesaprovado.setState(false);
-    checkPendiente.setState(false);
-    checkSolicitado.setState(false);
-
-    for (Producto prod : listaProductosExternos) {
-        choiceProducto.add(prod.getCodigo() + " - " + prod.getNombre() + " - $" + prod.getPrecioU());
-        textPrecioU.setText(String.valueOf(prod.getPrecioU()));
-    }
-
-    for (Empleado e : listaEmpleadosExternos) {
-        choiceEmpleado.add(e.getCedula() + " - " + e.getNombre() + " - "+ e.getDepartamento());
+        }
 
     }
-
-}
 
 
 /*
@@ -422,6 +422,3 @@ public void validarCheckBox(Checkbox checkbox){
 
 
 }
-
-
-
