@@ -293,7 +293,6 @@
                                     .append(" Estado: ").append(solicitud.getEstadoSolicitud())
                                     .append(" Empleado: ").append(solicitud.getSolicitante().getNombre());
 
-                            // Imprimir los detalles de la solicitud
                             informacion.append("\n  Detalles:\n");
                             for (DetalleCompra detalle : solicitud.getDetalleCompras()) {
                                 informacion.append("    - Producto: ").append(detalle.getProducto().getNombre())
@@ -301,7 +300,11 @@
                                         .append(", Precio: ").append(detalle.calcularCostoTotal())
                                         .append("\n");
                             }
+                            informacion.append("  Total de la solicitud: ")
+                                    .append(solicitud.calcularTotalSolicitud())
+                                    .append("\n");
                         }
+
 
                     }
                     }
