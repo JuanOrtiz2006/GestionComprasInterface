@@ -163,7 +163,7 @@ public class VentanaPrincipal extends Frame {
                 List<Empleado> empleadoList = ventanaRegistroEmpleado.getListaEmpleados();
                 System.out.println("Empleados al crear ventana solicitud: " + listaProductos.size());
                 for (Empleado em : empleadoList) {
-                    System.out.println(em.getNombre() + " - " +em.getCedula());
+                    System.out.println(em.getNombre() + " - " + em.getCedula());
                 }
                 ventanaRegistroSolicitud = new VentanaRegistroSolicitud(listaProductos, listaEmpleados, listaSolicitudes);
                 ventanaRegistroSolicitud.setVisible(true);
@@ -179,7 +179,7 @@ public class VentanaPrincipal extends Frame {
             }
         });
 
-        addWindowListener( new java.awt.event.WindowAdapter(){
+        addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent e) {
                 dispose(); // Cierra solo esta ventana
             }
@@ -279,35 +279,6 @@ public class VentanaPrincipal extends Frame {
 
 // Verificamos si la ventana de solicitudes existe
 
-                if (ventanaRegistroSolicitud == null) {
-                    informacion.append("No hay solicitudes registradas.\n");
-                } else {
-                    listaSolicitudes = ventanaRegistroSolicitud.getListaSolicitudes();
-                    if (listaSolicitudes.isEmpty()) {
-                        informacion.append("No hay solicitudes registradas.\n");
-                    } else {
-                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
-                        for (SolicitudDeCompra solicitud : listaSolicitudes) {
-                            informacion.append("\nCódigo: ").append(solicitud.getIdSolicitud())
-                                    .append(" Fecha: ").append(formato.format(solicitud.getFechaSolicitud().getTime()))
-                                    .append(" Estado: ").append(solicitud.getEstadoSolicitud())
-                                    .append(" Empleado: ").append(solicitud.getSolicitante().getNombre());
-
-                            informacion.append("\n  Detalles:\n");
-                            for (DetalleCompra detalle : solicitud.getDetalleCompras()) {
-                                informacion.append("    - Producto: ").append(detalle.getProducto().getNombre())
-                                        .append(", Cantidad: ").append(detalle.getCantidad())
-                                        .append(", Precio: ").append(detalle.calcularCostoTotal())
-                                        .append("\n");
-                            }
-                            informacion.append("  Total de la solicitud: ")
-                                    .append(solicitud.calcularTotalSolicitud())
-                                    .append("\n");
-                        }
-
-
-                    }
         if (ventanaRegistroSolicitud == null) {
             informacion.append("No hay solicitudes registradas.\n");
         } else {
@@ -323,7 +294,6 @@ public class VentanaPrincipal extends Frame {
                             .append(" Estado: ").append(solicitud.getEstadoSolicitud())
                             .append(" Empleado: ").append(solicitud.getSolicitante().getNombre());
 
-                    // Imprimir los detalles de la solicitud
                     informacion.append("\n  Detalles:\n");
                     for (DetalleCompra detalle : solicitud.getDetalleCompras()) {
                         informacion.append("    - Producto: ").append(detalle.getProducto().getNombre())
@@ -331,20 +301,24 @@ public class VentanaPrincipal extends Frame {
                                 .append(", Precio: ").append(detalle.calcularCostoTotal())
                                 .append("\n");
                     }
+                    informacion.append("  Total de la solicitud: ")
+                            .append(solicitud.calcularTotalSolicitud())
+                            .append("\n");
                 }
 
+
+
             }
+
+
+            // Mostrar la información en un JOptionPane
+            JOptionPane.showMessageDialog(this, informacion.toString(), "Información General", JOptionPane.INFORMATION_MESSAGE);
         }
-
-
-
-        // Mostrar la información en un JOptionPane
-        JOptionPane.showMessageDialog(this, informacion.toString(), "Información General", JOptionPane.INFORMATION_MESSAGE);
     }
 
 
-
-    public static void main(String[] args) {
-        new VentanaPrincipal();
+        public static void main (String[]args){
+            new VentanaPrincipal();
+        }
     }
-}
+
