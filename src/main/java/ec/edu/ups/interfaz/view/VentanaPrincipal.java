@@ -278,6 +278,36 @@ public class VentanaPrincipal extends Frame {
         informacion.append("\nLista de Solicitudes:\n");
 
 // Verificamos si la ventana de solicitudes existe
+
+                if (ventanaRegistroSolicitud == null) {
+                    informacion.append("No hay solicitudes registradas.\n");
+                } else {
+                    listaSolicitudes = ventanaRegistroSolicitud.getListaSolicitudes();
+                    if (listaSolicitudes.isEmpty()) {
+                        informacion.append("No hay solicitudes registradas.\n");
+                    } else {
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+                        for (SolicitudDeCompra solicitud : listaSolicitudes) {
+                            informacion.append("\nCódigo: ").append(solicitud.getIdSolicitud())
+                                    .append(" Fecha: ").append(formato.format(solicitud.getFechaSolicitud().getTime()))
+                                    .append(" Estado: ").append(solicitud.getEstadoSolicitud())
+                                    .append(" Empleado: ").append(solicitud.getSolicitante().getNombre());
+
+                            informacion.append("\n  Detalles:\n");
+                            for (DetalleCompra detalle : solicitud.getDetalleCompras()) {
+                                informacion.append("    - Producto: ").append(detalle.getProducto().getNombre())
+                                        .append(", Cantidad: ").append(detalle.getCantidad())
+                                        .append(", Precio: ").append(detalle.calcularCostoTotal())
+                                        .append("\n");
+                            }
+                            informacion.append("  Total de la solicitud: ")
+                                    .append(solicitud.calcularTotalSolicitud())
+                                    .append("\n");
+                        }
+
+
+                    }
         if (ventanaRegistroSolicitud == null) {
             informacion.append("No hay solicitudes registradas.\n");
         } else {
